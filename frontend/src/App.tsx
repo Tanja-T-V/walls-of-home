@@ -1,24 +1,43 @@
-import { useEffect, useState } from 'react';
+import {
+    createHashRouter,
+    Outlet,
+    RouterProvider,
+    ScrollRestoration,
+} from 'react-router-dom';
+import Header from './components/header';
+import Footer from './components/footer';
+import LoginPage from './views/loginpage';
+import StartPage from './views/startpage';
+import Mypage from './views/mypage';
+import { Container } from 'react-bootstrap';
 
 import './App.css';
 
+// Dont forget # its ex: /#/mypage
+
 function App() {
-  const [value, setValue] = useState<string | null>(null);
+    const router = createHashRouter([
+        {
+            children: [
+                { element: <LoginPage />, path: '/' },
+                { element: <StartPage />, path: '/start' },
 
-  useEffect(() => {
-    fetch('http://localhost:8080/houses')
-      .then((res) => res.text())
-      .then((data) => {
-        setValue(data);
-      });
-  }, []);
+                { element: <Mypage />, path: '/mypage' },
+            ],
+            element: (
+                <Container fluid className="p-0 min-vh-100">
+                    <Header />
+                    <ScrollRestoration />
+                    <main>
+                        <Outlet />
+                    </main>
+                    <Footer />
+                </Container>
+            ),
+        },
+    ]);
 
-  return (
-    <>
-      <h1>Testings</h1>
-      {value}
-    </>
-  );
+    return <RouterProvider router={router} />;
 }
 
 export default App;
