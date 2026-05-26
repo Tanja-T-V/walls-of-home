@@ -4,6 +4,12 @@ function HouseCards() {
     // Creates variables with data from Context
     const { houses, isLoading } = useHousesContext();
 
+    // Removes leftovers form SQL DATE. Removes Timezone. 2026-05-26T00:00:00.000Z to 2026-05-26
+    const houseClean = houses.map((house) => ({
+        ...house,
+        publiched: house.publiched.toString().split('T')[0],
+    }));
+
     //Shows if api is still fetching
     if (isLoading) {
         return <p>Loading data</p>;
@@ -11,7 +17,7 @@ function HouseCards() {
 
     return (
         <>
-            {houses.map((house) => (
+            {houseClean.map((house) => (
                 <div key={house.id} className="housecards">
                     <p>
                         Price:

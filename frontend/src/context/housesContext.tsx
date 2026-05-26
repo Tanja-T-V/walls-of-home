@@ -36,7 +36,7 @@ export const HousesContextProvider = ({ children }: PropsWithChildren<{}>) => {
 
     // Uses Houses interface and makse data use it.
     useEffect(() => {
-        fetch('http://localhost:8080/houses')
+        fetch('http://localhost:8080/houses/houses')
             .then((res) => res.json())
             .then((data: Houses[]) => {
                 console.log(data);

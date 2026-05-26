@@ -3,23 +3,7 @@ import express from 'express';
 import { database } from './database/database.js';
 import type { QueryResult } from 'pg';
 
-//---- Interfaces -----
-
-interface Houses {
-    id: number;
-    start_price: number;
-    currency: string;
-    city: string;
-    address: string;
-    property_type: string;
-    living_area: string;
-    rooms: number;
-    build_year: number;
-    parking: string;
-    exterior: string;
-    description: string;
-    publiched: string;
-}
+import apiHouses from './serverHouses.js';
 
 // Creates app.
 const app = express();
@@ -31,14 +15,9 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 
-//----- Houses ----
-
-app.get('/houses', async (req, res) => {
-    const { rows } = await database.query('SELECT * FROM houses');
-    console.log('Inside get houses');
-    console.log(rows);
-    res.status(200).send(rows);
-});
+// Imports serverfiles
+// When fetching its gonne need to be ex: /houses/houses
+app.use('/houses', apiHouses);
 
 //----- Login ------
 app.post('/login', async (req, res) => {
