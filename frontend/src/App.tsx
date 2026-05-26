@@ -10,6 +10,7 @@ import LoginPage from './views/loginpage';
 import StartPage from './views/startpage';
 import Mypage from './views/mypage';
 import { Container } from 'react-bootstrap';
+import { HousesContextProvider } from './context/housesContext';
 
 import './App.css';
 
@@ -21,18 +22,22 @@ function App() {
             children: [
                 { element: <LoginPage />, path: '/' },
                 { element: <StartPage />, path: '/start' },
-
                 { element: <Mypage />, path: '/mypage' },
             ],
             element: (
-                <Container fluid className="p-0 min-vh-100">
-                    <Header />
-                    <ScrollRestoration />
-                    <main>
-                        <Outlet />
-                    </main>
-                    <Footer />
-                </Container>
+                <HousesContextProvider>
+                    <Container
+                        fluid
+                        className="p-0 d-flex flex-column min-vh-100"
+                    >
+                        <Header />
+                        <ScrollRestoration />
+                        <main className="flex-grow-1">
+                            <Outlet />
+                        </main>
+                        <Footer />
+                    </Container>
+                </HousesContextProvider>
             ),
         },
     ]);

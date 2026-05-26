@@ -1,3 +1,22 @@
 .loginbox {
     background-color: plum;
+    max-width: 100%;
+}
+
+.housecards {
+    background-color: rgb(160, 221, 185);
+    margin: 1rem;
+    width: 340px;
+}
+
+@media (min-width: 720px) {
+    .loginbox {
+        max-width: 70%;
+    }
+}
+
+@media (min-width: 960px) {
+    .loginbox {
+        max-width: 50%;
+    }
 }

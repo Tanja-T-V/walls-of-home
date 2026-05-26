@@ -18,8 +18,8 @@ function Login({
     onCreate,
 }: Props) {
     return (
-        <>
-            <Container className="loginbox">
+        <Container className="loginbox p-3">
+            <Form onSubmit={onLogin}>
                 <Form.Group className="mb-3" controlId="usernameLogin">
                     <Form.Label>Username</Form.Label>
                     <Form.Control
@@ -36,18 +36,20 @@ function Login({
                 </Form.Group>
                 <Stack gap={6}>
                     <Button className="my-3" onClick={onLogin}>
-                        Loggin
+                        Login
                     </Button>
                     <Button
                         className="my-3"
-                        variant="outline-secondary"
+                        variant="secondary"
+                        size="sm"
+                        disabled
                         onClick={onCreate}
                     >
                         Create Account
                     </Button>
                 </Stack>
-            </Container>
-        </>
+            </Form>
+        </Container>
     );
 }
 

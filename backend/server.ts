@@ -23,6 +23,7 @@ interface Houses {
 
 // Creates app.
 const app = express();
+// Corse fix
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -35,6 +36,7 @@ app.use(express.json());
 app.get('/houses', async (req, res) => {
     const { rows } = await database.query('SELECT * FROM houses');
     console.log('Inside get houses');
+    console.log(rows);
     res.status(200).send(rows);
 });
 

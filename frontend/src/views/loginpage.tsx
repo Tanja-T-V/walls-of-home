@@ -1,5 +1,6 @@
 import Login from '../components/login';
 import { useState } from 'react';
+import { Container } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 
 function LoginPage() {
@@ -44,7 +45,7 @@ function LoginPage() {
     }
 
     return (
-        <div className="m-5">
+        <Container className="d-flex justify-content-center my-5">
             <Login
                 username={username}
                 setUsername={setUsername}
@@ -52,7 +53,7 @@ function LoginPage() {
                 onLogin={handleLogin}
                 onCreate={handleCreateAccount}
             />
-        </div>
+        </Container>
     );
 }
 
