@@ -1,4 +1,5 @@
 import { useHousesContext } from '../context/housesContext';
+import { Spinner } from 'react-bootstrap';
 
 function HouseCards() {
     // Creates variables with data from Context
@@ -12,7 +13,14 @@ function HouseCards() {
 
     //Shows if api is still fetching
     if (isLoading) {
-        return <p>Loading data</p>;
+        return (
+            <>
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
+                <p>Loading houses...</p>
+            </>
+        );
     }
 
     return (
