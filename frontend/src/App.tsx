@@ -18,11 +18,6 @@ import './App.css';
 // Dont forget # its ex: /#/mypage
 
 function App() {
-    // Outlet Props
-    // const [isLogedIn, setIsLogedIn] = useState(false);
-    // <Header login={isLogedIn} />
-    //<Outlet context={{ isLogedIn, setIsLogedIn }} />
-
     const router = createHashRouter([
         {
             children: [

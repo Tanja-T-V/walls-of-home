@@ -1,9 +1,17 @@
 import { Nav, Container, Navbar, NavDropdown } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { useAuthContext } from '../context/authContext';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
-    const { isLoggedIn } = useAuthContext();
+    const { isLoggedIn, setIsLoggedIn } = useAuthContext();
+
+    const navigate = useNavigate();
+
+    function handleLoggout() {
+        setIsLoggedIn(false);
+        navigate('/');
+    }
 
     return (
         <header className="Header">
@@ -24,7 +32,9 @@ function Header() {
                                             About
                                         </NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="#">
+                                        <NavDropdown.Item
+                                            onClick={handleLoggout}
+                                        >
                                             Logout
                                         </NavDropdown.Item>
                                     </NavDropdown>

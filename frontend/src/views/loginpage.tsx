@@ -1,7 +1,7 @@
 import Login from '../components/login';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '../context/authContext';
 
@@ -13,6 +13,8 @@ interface Data {
 function LoginPage() {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+
+    const navigate = useNavigate();
 
     // Login context
     const { isLoggedIn, setIsLoggedIn, setAccID, setAccName, setLogginErr } =
@@ -54,9 +56,11 @@ function LoginPage() {
         console.log('Handeling creating account');
     }
 
-    if (isLoggedIn) {
-        return <Navigate to="/start" />;
-    }
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/start');
+        }
+    }, [isLoggedIn]);
 
     return (
         <Container className="d-flex justify-content-center my-5">
