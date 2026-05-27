@@ -9,6 +9,10 @@
     width: 340px;
 }
 
+.errotext {
+    color: red;
+}
+
 @media (min-width: 720px) {
     .loginbox {
         max-width: 70%;

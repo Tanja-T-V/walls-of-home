@@ -8,36 +8,44 @@ import Header from './components/header';
 import Footer from './components/footer';
 import LoginPage from './views/loginpage';
 import StartPage from './views/startpage';
-import Mypage from './views/mypage';
+import MyLikePage from './views/mylikes';
 import { Container } from 'react-bootstrap';
 import { HousesContextProvider } from './context/housesContext';
+import { AuthProvider } from './context/authContext';
 
 import './App.css';
 
 // Dont forget # its ex: /#/mypage
 
 function App() {
+    // Outlet Props
+    // const [isLogedIn, setIsLogedIn] = useState(false);
+    // <Header login={isLogedIn} />
+    //<Outlet context={{ isLogedIn, setIsLogedIn }} />
+
     const router = createHashRouter([
         {
             children: [
                 { element: <LoginPage />, path: '/' },
                 { element: <StartPage />, path: '/start' },
-                { element: <Mypage />, path: '/mypage' },
+                { element: <MyLikePage />, path: '/likes' },
             ],
             element: (
-                <HousesContextProvider>
-                    <Container
-                        fluid
-                        className="p-0 d-flex flex-column min-vh-100"
-                    >
-                        <Header />
-                        <ScrollRestoration />
-                        <main className="flex-grow-1">
-                            <Outlet />
-                        </main>
-                        <Footer />
-                    </Container>
-                </HousesContextProvider>
+                <AuthProvider>
+                    <HousesContextProvider>
+                        <Container
+                            fluid
+                            className="p-0 d-flex flex-column min-vh-100"
+                        >
+                            <Header />
+                            <ScrollRestoration />
+                            <main className="flex-grow-1">
+                                <Outlet />
+                            </main>
+                            <Footer />
+                        </Container>
+                    </HousesContextProvider>
+                </AuthProvider>
             ),
         },
     ]);

@@ -2,6 +2,8 @@ import { Container, Form, Button, Stack } from 'react-bootstrap';
 import './components.css';
 import type React from 'react';
 
+import { useAuthContext } from '../context/authContext';
+
 type Props = {
     username: string;
     setUsername: React.Dispatch<React.SetStateAction<string>>;
@@ -17,6 +19,10 @@ function Login({
     onLogin,
     onCreate,
 }: Props) {
+    // For authContext
+    const { logginErr } = useAuthContext();
+    const throwErr = logginErr;
+
     return (
         <Container className="loginbox p-3">
             <Form onSubmit={onLogin}>
@@ -34,6 +40,11 @@ function Login({
                         onChange={(event) => setPassword(event.target.value)}
                     />
                 </Form.Group>
+
+                {throwErr && (
+                    <p className="errotext">Invalid username or password</p>
+                )}
+
                 <Stack gap={6}>
                     <Button className="my-3" onClick={onLogin}>
                         Login

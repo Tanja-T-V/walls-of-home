@@ -3,11 +3,20 @@ import { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 
+import { useAuthContext } from '../context/authContext';
+
+interface Data {
+    id: number;
+    userName: string;
+}
+
 function LoginPage() {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const [canLogin, setCanlogin] = useState<boolean>(false);
+    // Login context
+    const { isLoggedIn, setIsLoggedIn, setAccID, setAccName, setLogginErr } =
+        useAuthContext();
 
     async function handleLogin() {
         const loginInfo = { username: username, password: password };
@@ -19,15 +28,20 @@ function LoginPage() {
                 },
                 method: 'POST',
             });
+            // To get the account data
+            const data: Data[] = await res.json();
 
             if (res.status === 200) {
-                console.log('works', res);
-                setCanlogin(true);
+                setAccID(data[0].id);
+                setAccName(data[0].userName);
+                setIsLoggedIn(true);
+                setLogginErr(false);
 
                 return;
             } else {
-                console.log('No account', res);
-                setCanlogin(false);
+                setIsLoggedIn(false);
+
+                setLogginErr(true);
 
                 return;
             }
@@ -40,7 +54,7 @@ function LoginPage() {
         console.log('Handeling creating account');
     }
 
-    if (canLogin) {
+    if (isLoggedIn) {
         return <Navigate to="/start" />;
     }
 

@@ -27,8 +27,8 @@ router.post('/login', async (req, res) => {
     }
 
     const { rows }: QueryResult<Login> = await database.query(
-        'SELECT * FROM accounts WHERE username = $1',
-        [user.username]
+        'SELECT * FROM accounts WHERE username = $1 AND password = $2',
+        [user.username, user.password]
     );
 
     if (rows.length === 0) {
@@ -36,6 +36,7 @@ router.post('/login', async (req, res) => {
     }
 
     if (rows) {
+        console.log('Denna info: ', rows);
         return res.status(200).send(rows);
     }
 });
