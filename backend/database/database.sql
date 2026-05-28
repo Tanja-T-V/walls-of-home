@@ -1,7 +1,14 @@
+/*
+    To read file in terminal do: \i database.sql
+    Comando work also when render is used
+*/
+
+-- Tables with foregin keys
 DROP TABLE IF EXISTS houses_tags;
 DROP TABLE IF EXISTS userfavs;
 DROP TABLE IF EXISTS userbids;
 
+-- Tables without FK
 DROP TABLE IF EXISTS accounts;
 DROP TABLE IF EXISTS houses;
 DROP TABLE IF EXISTS housestags;
@@ -12,6 +19,7 @@ CREATE TABLE accounts (
     password VARCHAR NOT NULL CHECK(length(password) > 6)
 );
 
+-- DATE get automaticly including Timezone when read in Frontend JS
 CREATE TABLE houses (
     id SERIAL PRIMARY KEY,
     start_price INTEGER NOT NULL CHECK (start_price > 1),
@@ -52,6 +60,7 @@ CREATE TABLE userbids (
     price INTEGER NOT NULL CHECK (price > 1)
 );
 
+--- Inserts
 
 INSERT INTO accounts (username, password) VALUES ('Lalice', 'testing123');
 INSERT INTO accounts (username, password) VALUES ('ChiliLena', 'test123');

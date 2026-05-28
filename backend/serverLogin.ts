@@ -26,12 +26,13 @@ router.post('/login', async (req, res) => {
         return res.status(400).send('Missing body information');
     }
 
-    const { rows }: QueryResult<Login> = await database.query(
+    const { rows, rowCount }: QueryResult<Login> = await database.query(
         'SELECT * FROM accounts WHERE username = $1 AND password = $2',
         [user.username, user.password]
     );
 
-    if (rows.length === 0) {
+    // RowCount says how many rows are sent back. instead for using rows.length
+    if (rowCount === 0) {
         return res.status(401).send('No account exsists');
     }
 
