@@ -4,7 +4,7 @@ import { useAuthContext } from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
 
 function Header() {
-    const { isLoggedIn, setIsLoggedIn } = useAuthContext();
+    const { isLoggedIn, setIsLoggedIn, accName } = useAuthContext();
 
     const navigate = useNavigate();
 
@@ -22,6 +22,8 @@ function Header() {
                         <Nav className="me-auto">
                             {isLoggedIn ? (
                                 <>
+                                    <p className="mx-4">Welcome {accName}</p>
+
                                     <Nav.Link href="#start">Start</Nav.Link>
                                     <Nav.Link href="#likes">Liked</Nav.Link>
                                     <NavDropdown

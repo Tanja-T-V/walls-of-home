@@ -7,7 +7,7 @@ import { useAuthContext } from '../context/authContext';
 
 interface Data {
     id: number;
-    userName: string;
+    username: string;
 }
 
 function LoginPage() {
@@ -35,7 +35,7 @@ function LoginPage() {
 
             if (res.status === 200) {
                 setAccID(data[0].id);
-                setAccName(data[0].userName);
+                setAccName(data[0].username);
                 setIsLoggedIn(true);
                 setLogginErr(false);
 
