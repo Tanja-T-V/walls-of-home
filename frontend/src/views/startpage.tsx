@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import Housecard from '../components/housecard';
+import { useAuthContext } from '../context/authContext';
+import { useNavigate } from 'react-router-dom';
 
 // House interfaces
 import type { Houses } from '../interface/houseIntf';
 
 function StartPage() {
+    const { isLoggedIn } = useAuthContext();
+
     const [houses, setHouses] = useState<Houses[]>([]);
     // makes isLoading true while api gets fetched.
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -21,6 +25,14 @@ function StartPage() {
                 setIsLoading(false);
             });
     }, []);
+
+    // If user isnt logged in gets redirested to start.
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate('/');
+        }
+    }, [isLoggedIn]);
 
     return (
         <>

@@ -27,6 +27,7 @@ function HouseCards({ houses, isLoading }: Props) {
         );
     }
 
+    // If they houses array is empty.
     if (houses.length === 0) {
         return (
             <>

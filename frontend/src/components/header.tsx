@@ -26,6 +26,8 @@ function Header() {
 
                                     <Nav.Link href="#start">Start</Nav.Link>
                                     <Nav.Link href="#likes">Liked</Nav.Link>
+                                    <Nav.Link href="#bids">Bids</Nav.Link>
+
                                     <NavDropdown
                                         title="Options"
                                         id="basic-navbar.nav"

@@ -55,6 +55,7 @@ function MylikesPage() {
         }
     }
 
+    // Looks on userfavs if it updates, runs function that gets the userfavs houses.
     useEffect(() => {
         getFavHouses();
     }, [userfavs]);

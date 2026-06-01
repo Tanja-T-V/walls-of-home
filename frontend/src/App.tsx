@@ -9,6 +9,7 @@ import Footer from './components/footer';
 import LoginPage from './views/loginpage';
 import StartPage from './views/startpage';
 import MyLikePage from './views/mylikes';
+import BidPage from './views/bidspage';
 import { Container } from 'react-bootstrap';
 import { AuthProvider } from './context/authContext';
 
@@ -23,6 +24,7 @@ function App() {
                 { element: <LoginPage />, path: '/' },
                 { element: <StartPage />, path: '/start' },
                 { element: <MyLikePage />, path: '/likes' },
+                { element: <BidPage />, path: '/bids' },
             ],
             element: (
                 <AuthProvider>
