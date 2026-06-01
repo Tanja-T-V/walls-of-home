@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useAuthContext } from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
 
+import Housecard from '../components/housecard';
+
 // House interfaces
 import type { Houses, FavHouses } from '../interface/houseIntf';
 
@@ -10,6 +12,7 @@ function MylikesPage() {
     const userInfo = accID;
 
     const [houses, setHouses] = useState<Houses[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     // Users favs from database.
     const [userfavs, setUserFavs] = useState<FavHouses[]>([]);
@@ -41,6 +44,7 @@ function MylikesPage() {
             if (res.status === 200) {
                 const data: Houses[] = await res.json();
                 setHouses(data);
+                setIsLoading(false);
 
                 return;
             } else {
@@ -67,12 +71,9 @@ function MylikesPage() {
         <div>
             <p>My liked houses</p>
             <p>USer liked API:</p>
-            {houses.map((house) => (
-                <div key={house.id}>
-                    <p>{house.address}</p>
-                    <p>{house.city}</p>
-                </div>
-            ))}
+            <div className="d-flex flex-wrap justify-content-center">
+                <Housecard houses={houses} isLoading={isLoading} />
+            </div>
         </div>
     );
 }

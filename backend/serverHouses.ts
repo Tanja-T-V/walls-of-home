@@ -59,14 +59,7 @@ router.post('/houses', async (req, res) => {
         [[houseID.houses_id]]
     );
 
-    if (rowCount === 0) {
-        return res.status(401).send('No liked houses');
-    }
-
-    if (houseID) {
-        console.log('Detta skickar api tillbaak: ', rows);
-        res.status(200).send(rows);
-    }
+    res.status(200).send(rows);
 });
 
 //----- FavHouses ----

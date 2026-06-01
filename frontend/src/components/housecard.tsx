@@ -1,10 +1,14 @@
-import { useHousesContext } from '../context/housesContext';
 import { Spinner } from 'react-bootstrap';
 
-function HouseCards() {
-    // Creates variables with data from Context
-    const { houses, isLoading } = useHousesContext();
+// Interface
+import type { Houses } from '../interface/houseIntf';
 
+type Props = {
+    houses: Houses[];
+    isLoading: boolean;
+};
+
+function HouseCards({ houses, isLoading }: Props) {
     // Removes leftovers form SQL DATE. Removes Timezone. 2026-05-26T00:00:00.000Z to 2026-05-26
     const houseClean = houses.map((house) => ({
         ...house,
@@ -19,6 +23,14 @@ function HouseCards() {
                     <span className="visually-hidden">Loading...</span>
                 </Spinner>
                 <p>Loading houses...</p>
+            </>
+        );
+    }
+
+    if (houses.length === 0) {
+        return (
+            <>
+                <p>No facilites found.</p>
             </>
         );
     }

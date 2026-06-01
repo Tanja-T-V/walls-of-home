@@ -1,7 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import { database } from './database/database.js';
-import type { QueryResult } from 'pg';
 
 import apiHouses from './serverHouses.js';
 import apiLogin from './serverLogin.js';

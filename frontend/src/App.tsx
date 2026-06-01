@@ -10,7 +10,6 @@ import LoginPage from './views/loginpage';
 import StartPage from './views/startpage';
 import MyLikePage from './views/mylikes';
 import { Container } from 'react-bootstrap';
-import { HousesContextProvider } from './context/housesContext';
 import { AuthProvider } from './context/authContext';
 
 import './App.css';
@@ -27,19 +26,17 @@ function App() {
             ],
             element: (
                 <AuthProvider>
-                    <HousesContextProvider>
-                        <Container
-                            fluid
-                            className="p-0 d-flex flex-column min-vh-100"
-                        >
-                            <Header />
-                            <ScrollRestoration />
-                            <main className="flex-grow-1">
-                                <Outlet />
-                            </main>
-                            <Footer />
-                        </Container>
-                    </HousesContextProvider>
+                    <Container
+                        fluid
+                        className="p-0 d-flex flex-column min-vh-100"
+                    >
+                        <Header />
+                        <ScrollRestoration />
+                        <main className="flex-grow-1">
+                            <Outlet />
+                        </main>
+                        <Footer />
+                    </Container>
                 </AuthProvider>
             ),
         },
