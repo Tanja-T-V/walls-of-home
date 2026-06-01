@@ -30,10 +30,11 @@ function LoginPage() {
                 },
                 method: 'POST',
             });
-            // To get the account data
-            const data: Data[] = await res.json();
 
             if (res.status === 200) {
+                // To get the account data
+                const data: Data[] = await res.json();
+
                 setAccID(data[0].id);
                 setAccName(data[0].username);
                 setIsLoggedIn(true);
@@ -42,13 +43,12 @@ function LoginPage() {
                 return;
             } else {
                 setIsLoggedIn(false);
-
                 setLogginErr(true);
 
                 return;
             }
         } catch (error) {
-            console.log(error);
+            console.log('Backend Error');
         }
     }
 

@@ -1,5 +1,5 @@
 import express from 'express';
-
+import cors from 'cors';
 import { database } from './database/database.js';
 import type { QueryResult } from 'pg';
 
@@ -8,18 +8,17 @@ import apiLogin from './serverLogin.js';
 
 // Creates app.
 const app = express();
+
 // Corse fix
-app.use((_req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-});
+app.use(cors());
+
 app.use(express.json());
 
 // Imports serverfiles
 // When fetching its gonne need to be ex: /houses/houses
 app.use('/houses', apiHouses);
 app.use('/login', apiLogin);
+app.use('/userfavs', apiHouses);
 
 // ---- App listen ---
 app.listen(8080, () => {

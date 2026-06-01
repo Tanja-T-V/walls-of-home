@@ -21,7 +21,6 @@ function Login({
 }: Props) {
     // For authContext
     const { logginErr } = useAuthContext();
-    const throwErr = logginErr;
 
     return (
         <Container className="loginbox p-3">
@@ -41,7 +40,7 @@ function Login({
                     />
                 </Form.Group>
 
-                {throwErr && (
+                {logginErr && (
                     <p className="errotext">Invalid username or password</p>
                 )}
 

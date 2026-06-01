@@ -37,7 +37,6 @@ router.post('/login', async (req, res) => {
     }
 
     if (rows) {
-        console.log('Denna info: ', rows);
         return res.status(200).send(rows);
     }
 });
