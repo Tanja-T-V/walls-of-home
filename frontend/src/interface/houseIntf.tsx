@@ -19,3 +19,10 @@ export interface FavHouses {
     user_id: number;
     houses_id: number;
 }
+
+export interface BidHouses {
+    id: number;
+    user_id: number;
+    houses_id: number;
+    price: number;
+}

@@ -9,6 +9,12 @@
     width: 340px;
 }
 
+.bidcard {
+    background-color: cornflowerblue;
+    margin: 1rem;
+    width: 340px;
+}
+
 .errotext {
     color: red;
 }

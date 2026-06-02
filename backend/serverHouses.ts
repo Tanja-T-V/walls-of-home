@@ -36,6 +36,13 @@ interface HouseFavID {
     houses_id: number[];
 }
 
+interface BidHouses {
+    id: number;
+    user_id: number;
+    houses_id: number;
+    price: number;
+}
+
 //----- Houses ----
 
 router.get('/houses', async (_req, res) => {
@@ -73,6 +80,17 @@ router.get('/userfavs/:userdid', async (req, res) => {
     );
 
     res.status(200).send(favHouses.rows);
+});
+
+//----- Bid houses ----
+router.get('/bids/:usderid', async (req, res) => {
+    const user = req.params.usderid;
+
+    const bidHouses: QueryResult<BidHouses> = await database.query(
+        'SELECT * FROM userbids WHERE user_id = $1',
+        [user]
+    );
+    res.status(200).send(bidHouses.rows);
 });
 
 // Exports router so it can be used in main server
