@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuthContext } from '../context/authContext';
+import { Button } from 'react-bootstrap';
 
+// Components
 import HouseDisplay from '../components/houseDisplay';
 
 // Interface
@@ -26,6 +28,14 @@ function HousePage() {
             });
     }, []);
 
+    function handleLike() {
+        console.log('Handeling like');
+    }
+
+    function handleBid() {
+        console.log('Handeling bidding');
+    }
+
     // If user isnt logged in gets redirested to start.
     const navigate = useNavigate();
     useEffect(() => {
@@ -37,8 +47,17 @@ function HousePage() {
     return (
         <>
             <h2>Specific house</h2>
-            <p>{houseid}</p>
-            <HouseDisplay houses={house} isLoading={isLoading} />
+            <div className="m-5">
+                <HouseDisplay houses={house} isLoading={isLoading} />
+            </div>
+            <div>
+                <Button variant="primary" onClick={handleLike}>
+                    Like
+                </Button>
+                <Button variant="primary" onClick={handleBid}>
+                    Bid
+                </Button>
+            </div>
         </>
     );
 }

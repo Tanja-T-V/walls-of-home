@@ -1,7 +1,8 @@
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Button } from 'react-bootstrap';
 
 // Interface
 import type { Houses, BidHouses } from '../interface/houseIntf';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
     houses: Houses[];
@@ -15,6 +16,11 @@ function BidCards({ houses, bidhouses, isLoading }: Props) {
         ...house,
         publiched: house.publiched.toString().split('T')[0],
     }));
+
+    const navigate = useNavigate();
+    function handleHouseMore(houseid: number) {
+        return navigate(`/house/${houseid}`);
+    }
 
     //Shows if api is still fetching
     if (isLoading) {
@@ -54,6 +60,12 @@ function BidCards({ houses, bidhouses, isLoading }: Props) {
                                 ?.price
                         }
                     </p>
+                    <Button
+                        variant="primary"
+                        onClick={() => handleHouseMore(house.id)}
+                    >
+                        More..
+                    </Button>
                 </div>
             ))}
         </>
