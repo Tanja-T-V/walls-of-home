@@ -10,6 +10,7 @@ import LoginPage from './views/loginpage';
 import StartPage from './views/startpage';
 import MyLikePage from './views/mylikes';
 import BidPage from './views/bidspage';
+import HousePage from './views/housepage';
 import { Container } from 'react-bootstrap';
 import { AuthProvider } from './context/authContext';
 
@@ -25,6 +26,7 @@ function App() {
                 { element: <StartPage />, path: '/start' },
                 { element: <MyLikePage />, path: '/likes' },
                 { element: <BidPage />, path: '/bids' },
+                { element: <HousePage />, path: '/house/:houseid' },
             ],
             element: (
                 <AuthProvider>

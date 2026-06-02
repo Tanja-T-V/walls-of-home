@@ -54,6 +54,17 @@ router.get('/houses', async (_req, res) => {
     res.status(200).send(houses.rows);
 });
 
+router.get('/houses/:houseid', async (req, res) => {
+    const user = req.params.houseid;
+
+    const house: QueryResult<Houses> = await database.query(
+        'SELECT * FROM houses WHERE id = $1',
+        [user]
+    );
+
+    res.status(200).send(house.rows);
+});
+
 router.post('/houses', async (req, res) => {
     const houseID: HouseFavID = req.body;
 

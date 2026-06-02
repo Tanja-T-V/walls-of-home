@@ -1,4 +1,5 @@
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 // Interface
 import type { Houses } from '../interface/houseIntf';
@@ -14,6 +15,11 @@ function HouseCards({ houses, isLoading }: Props) {
         ...house,
         publiched: house.publiched.toString().split('T')[0],
     }));
+
+    const navigate = useNavigate();
+    function handleHouseMore(houseid: number) {
+        return navigate(`/house/${houseid}`);
+    }
 
     //Shows if api is still fetching
     if (isLoading) {
@@ -57,6 +63,12 @@ function HouseCards({ houses, isLoading }: Props) {
                         <p>Exterior: {house.exterior}</p>
                         <p>{house.description}</p>
                     </div>
+                    <Button
+                        variant="primary"
+                        onClick={() => handleHouseMore(house.id)}
+                    >
+                        More..
+                    </Button>
                 </div>
             ))}
         </>

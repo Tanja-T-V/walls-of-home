@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuthContext } from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
 
-import BidCards from '../components/bidcatd';
+import BidCards from '../components/bidcard';
 import type { Houses, BidHouses } from '../interface/houseIntf';
 
 function BidPage() {
