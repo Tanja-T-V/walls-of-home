@@ -32,7 +32,7 @@ function Header() {
                                         title="Options"
                                         id="basic-navbar.nav"
                                     >
-                                        <NavDropdown.Item href="#">
+                                        <NavDropdown.Item href="#about">
                                             About
                                         </NavDropdown.Item>
                                         <NavDropdown.Divider />
@@ -45,7 +45,7 @@ function Header() {
                                 </>
                             ) : (
                                 <>
-                                    <Nav.Link href="#">About</Nav.Link>
+                                    <Nav.Link href="#about">About</Nav.Link>
                                 </>
                             )}
                         </Nav>
