@@ -55,6 +55,9 @@ function HouseDisplay({ houses, isLoading }: Props) {
                     <div>
                         <p>Parking: {house.parking}</p>
                         <p>Exterior: {house.exterior}</p>
+                    </div>
+                    <div>
+                        <p>Description</p>
                         <p>{house.description}</p>
                     </div>
                 </div>

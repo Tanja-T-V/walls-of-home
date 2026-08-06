@@ -54,17 +54,19 @@ CREATE TABLE userfavs (
 );
 
 CREATE TABLE userbids (
-     id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES accounts(id),
     houses_id INTEGER REFERENCES houses(id),
-    price INTEGER NOT NULL CHECK (price > 1)
+    price INTEGER NOT NULL CHECK (price > 1),
+
+    UNIQUE (user_id, houses_id)
 );
 
 --- Inserts
 
-INSERT INTO accounts (username, password) VALUES ('Lalice', 'testing123');
-INSERT INTO accounts (username, password) VALUES ('ChiliLena', 'test123');
-INSERT INTO accounts (username, password) VALUES ('Anderos', 'test123');
+INSERT INTO accounts (username, password) VALUES ('Alice', 'test123');
+INSERT INTO accounts (username, password) VALUES ('Lena', 'DoggosExtreme');
+INSERT INTO accounts (username, password) VALUES ('Anderos', 'CakeIsALie');
 
 INSERT INTO houses (start_price, city, address, property_type, living_area, rooms, build_year, parking, exterior, description ) VALUES (5120000, 'Linköping', 'Ekbackevägen 22, 582 45 Linköping', 'House', '155 m2', 6, 1994, 'Garage', 'Backyard', 'A spacious family villa located in a quiet residential area. The home offers bright living spaces, a large garden, and excellent outdoor areas for entertaining.');
 INSERT INTO houses (start_price, city, address, property_type, living_area, rooms, build_year, parking, exterior, description ) VALUES (3450000, 'Gothenburg', 'Linnégatan 18C, 413 04 Gothenburg', 'Apartment', '72 m2', 3, 2016, 'Rent parking', 'Balcony', 'Modern apartment in a vibrant city district with open-plan design, balcony, and access to a shared rooftop terrace.');

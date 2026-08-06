@@ -94,6 +94,7 @@ router.get('/userfavs/:userdid', async (req, res) => {
 });
 
 //----- Bid houses ----
+// To display houses that user have bid on
 router.get('/bids/:usderid', async (req, res) => {
     const user = req.params.usderid;
 
@@ -102,6 +103,25 @@ router.get('/bids/:usderid', async (req, res) => {
         [user]
     );
     res.status(200).send(bidHouses.rows);
+});
+
+// To add bid to a house
+router.post('/bids', async (req, res) => {
+    const newBid: BidHouses = req.body;
+    console.log('inside post bid', newBid);
+
+    // Does a insert. In database it have UNIQE (user_id, houses_id) wich makes sure that a user can have multiply of same house. Here with ON CONFLIC it looks at same variable if its a conflict there. If user dont have house in their budlist then it gets added. If user allready have house they DO UPSATE and changes the price with EXCLUDED.
+
+    await database.query(
+        `INSERT INTO userbids (user_id, houses_id, price)
+        VALUES($1, $2, $3)
+        ON CONFLICT (user_id, houses_id)
+        DO UPDATE
+        SET price = EXCLUDED.price`,
+        [newBid.user_id, newBid.houses_id, newBid.price]
+    );
+
+    res.status(200).send();
 });
 
 // Exports router so it can be used in main server
