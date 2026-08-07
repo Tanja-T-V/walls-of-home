@@ -1,6 +1,12 @@
 /*
     To read file in terminal do: \i database.sql
-    Comando work also when render is used
+    Comando work also when render is used.
+
+    If letters look wrong with åäö in database then it didnt read as UTF8.
+    Run: SHOW client_encoding
+    If  ex on windows it says "WIN1252" its wrong settings.
+    Run: SET client_encoding TO 'UTF8'
+    Read again and it should say UFT8 and the letters should work again.
 */
 
 -- Tables with foregin keys
@@ -50,7 +56,9 @@ CREATE TABLE houses_tags (
 CREATE TABLE userfavs (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES accounts(id),
-    houses_id INTEGER REFERENCES houses(id)
+    houses_id INTEGER REFERENCES houses(id),
+
+    UNIQUE (user_id, houses_id)
 );
 
 CREATE TABLE userbids (

@@ -28,7 +28,6 @@ function App() {
                 { element: <MyLikePage />, path: '/likes' },
                 { element: <BidPage />, path: '/bids' },
                 { element: <AboutPage />, path: '/about' },
-
                 { element: <HousePage />, path: '/house/:houseid' },
             ],
             element: (

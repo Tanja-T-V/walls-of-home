@@ -14,6 +14,11 @@ export interface Houses {
     publiched: string;
 }
 
+export interface HouseData {
+    houses: Houses[];
+    isLiked: boolean;
+}
+
 export interface FavHouses {
     id: number;
     user_id: number;

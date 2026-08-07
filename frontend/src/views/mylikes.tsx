@@ -41,7 +41,7 @@ function MylikesPage() {
                 method: 'POST',
             });
 
-            if (res.status === 200) {
+            if (res.status === 201) {
                 const data: Houses[] = await res.json();
                 setHouses(data);
                 setIsLoading(false);

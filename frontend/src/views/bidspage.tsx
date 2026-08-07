@@ -37,7 +37,7 @@ function BidPage() {
                 method: 'POST',
             });
 
-            if (res.status === 200) {
+            if (res.status === 201) {
                 const data: Houses[] = await res.json();
                 setHouses(data);
                 setIsLoading(false);
@@ -67,11 +67,13 @@ function BidPage() {
     return (
         <>
             <h2>Bid page</h2>
-            <BidCards
-                houses={houses}
-                bidhouses={userBids}
-                isLoading={isLoading}
-            />
+            <div className="d-flex flex-wrap justify-content-center">
+                <BidCards
+                    houses={houses}
+                    bidhouses={userBids}
+                    isLoading={isLoading}
+                />
+            </div>
         </>
     );
 }

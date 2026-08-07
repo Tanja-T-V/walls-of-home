@@ -8,7 +8,7 @@ import LikeButton from '../components/likeButton';
 import BidBox from '../components/bidBox';
 
 // Interface
-import type { Houses } from '../interface/houseIntf';
+import type { Houses, HouseData } from '../interface/houseIntf';
 
 function HousePage() {
     const { houseid } = useParams();
@@ -19,13 +19,15 @@ function HousePage() {
     // For fetching specific house
     // Makes isLoading true while api gets fetched.
     const [house, setHouse] = useState<Houses[]>([]);
+    const [isLiked, setIsLiked] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/houses/houses/${houseid}`)
+        fetch(`http://localhost:8080/houses/houses/${houseid}?accID=${accID}`)
             .then((res) => res.json())
-            .then((data: Houses[]) => {
-                setHouse(data);
+            .then((data: HouseData) => {
+                setHouse(data.houses);
+                setIsLiked(data.isLiked);
             })
             .finally(() => {
                 setIsLoading(false);
@@ -34,7 +36,21 @@ function HousePage() {
 
     // ---- Handels like ----
     function handleLike() {
-        console.log('Handeling like');
+        const currentHouseId = house[0].id;
+        const likeInfo = {
+            user_id: accID,
+            houses_id: currentHouseId,
+        };
+
+        fetch('http://localhost:8080/houses/userfavs', {
+            body: JSON.stringify(likeInfo),
+            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+        })
+            .then((res) => res.json())
+            .then((data: boolean) => {
+                setIsLiked(data);
+            });
     }
 
     // ---- Handels Bid ----
@@ -70,8 +86,8 @@ function HousePage() {
             <div className="m-5">
                 <HouseDisplay houses={house} isLoading={isLoading} />
             </div>
-            <div>
-                <LikeButton />
+            <div className="m-2">
+                <LikeButton onLike={handleLike} isLiked={isLiked} />
             </div>
             <div>
                 <BidBox onBidding={handleBid} setBidOffer={setBidOffer} />

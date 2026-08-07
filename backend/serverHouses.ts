@@ -28,6 +28,13 @@ interface FavHouses {
     houses_id: number;
 }
 
+interface FavHousExsists {
+    id: number;
+    user_id: number;
+    houses_id: number;
+    exists: boolean;
+}
+
 interface User {
     user_id: number;
 }
@@ -55,14 +62,37 @@ router.get('/houses', async (_req, res) => {
 });
 
 router.get('/houses/:houseid', async (req, res) => {
-    const user = req.params.houseid;
+    const houseID = req.params.houseid;
+    const userID = req.query.accID;
 
     const house: QueryResult<Houses> = await database.query(
         'SELECT * FROM houses WHERE id = $1',
-        [user]
+        [houseID]
     );
 
-    res.status(200).send(house.rows);
+    if (userID === undefined) {
+        // Creates a const object with the house data and boolean if the house exsist in fav/liked database, only sends the boolean row.
+        const houseData = {
+            houses: house.rows,
+            isLiked: false,
+        };
+
+        res.status(200).send(houseData);
+    } else {
+        //Looks if house and user exsists and gives a boolean.
+        const favexsists: QueryResult<FavHousExsists> = await database.query(
+            'SELECT EXISTS (SELECT * FROM userfavs WHERE user_id = $1 AND houses_id = $2)',
+            [userID, houseID]
+        );
+
+        // Creates a const object with the house data and boolean if the house exsist in fav/liked database, only sends the boolean row.
+        const houseData = {
+            houses: house.rows,
+            isLiked: favexsists.rows[0]!.exists,
+        };
+
+        res.status(200).send(houseData);
+    }
 });
 
 router.post('/houses', async (req, res) => {
@@ -70,27 +100,73 @@ router.post('/houses', async (req, res) => {
 
     if (!('houses_id' in houseID)) {
         return res.status(400).send('Missing body information');
+    } else {
+        const { rows, rowCount }: QueryResult<Houses> = await database.query(
+            'SELECT * FROM houses WHERE id = ANY($1)',
+            [[houseID.houses_id]]
+        );
+
+        return res.status(201).send(rows);
     }
-
-    const { rows, rowCount }: QueryResult<Houses> = await database.query(
-        'SELECT * FROM houses WHERE id = ANY($1)',
-        [[houseID.houses_id]]
-    );
-
-    res.status(200).send(rows);
 });
 
-//----- FavHouses ----
+//----- FavHouses & Liked houses ----
 
 router.get('/userfavs/:userdid', async (req, res) => {
     const user = req.params.userdid;
-
     const favHouses: QueryResult<FavHouses> = await database.query(
         'SELECT * FROM userfavs WHERE user_id = $1',
         [user]
     );
 
-    res.status(200).send(favHouses.rows);
+    if (user === undefined) {
+        return res.status(404);
+    }
+
+    if (user !== undefined) {
+        return res.status(200).send(favHouses.rows);
+    } else {
+        return res.status(404);
+    }
+});
+
+router.post('/userfavs', async (req, res) => {
+    const newFav: FavHouses = req.body;
+
+    //Looks if hosue and user exsists and gives a boolean.
+    const favexsists: QueryResult<FavHousExsists> = await database.query(
+        'SELECT EXISTS (SELECT * FROM userfavs WHERE user_id = $1 AND houses_id = $2)',
+        [newFav.user_id, newFav.houses_id]
+    );
+
+    let likeExsists = favexsists.rows[0]!.exists;
+
+    if (newFav === undefined) {
+        return res.status(400).send('Missing body information');
+    }
+
+    if (likeExsists === true) {
+        // Delets a row / Fav/like.
+        await database.query(
+            `DELETE FROM userfavs
+            WHERE user_id = $1 AND houses_id = $2`,
+            [newFav.user_id, newFav.houses_id]
+        );
+        likeExsists = false;
+
+        return res.status(201).send(likeExsists);
+    } else if (likeExsists === false) {
+        await database.query(
+            `INSERT INTO userfavs(user_id, houses_id)
+            VALUES ($1, $2)`,
+            [newFav.user_id, newFav.houses_id]
+        );
+        likeExsists = true;
+
+        return res.status(201).send(likeExsists);
+    } else {
+        return res.status(400).send('Unknown problem');
+    }
 });
 
 //----- Bid houses ----
@@ -98,17 +174,20 @@ router.get('/userfavs/:userdid', async (req, res) => {
 router.get('/bids/:usderid', async (req, res) => {
     const user = req.params.usderid;
 
-    const bidHouses: QueryResult<BidHouses> = await database.query(
-        'SELECT * FROM userbids WHERE user_id = $1',
-        [user]
-    );
-    res.status(200).send(bidHouses.rows);
+    if (user === undefined) {
+        return res.status(404).send();
+    } else {
+        const bidHouses: QueryResult<BidHouses> = await database.query(
+            'SELECT * FROM userbids WHERE user_id = $1',
+            [user]
+        );
+        return res.status(200).send(bidHouses.rows);
+    }
 });
 
 // To add bid to a house
 router.post('/bids', async (req, res) => {
     const newBid: BidHouses = req.body;
-    console.log('inside post bid', newBid);
 
     // Does a insert. In database it have UNIQE (user_id, houses_id) wich makes sure that a user can have multiply of same house. Here with ON CONFLIC it looks at same variable if its a conflict there. If user dont have house in their budlist then it gets added. If user allready have house they DO UPSATE and changes the price with EXCLUDED.
 
@@ -121,7 +200,7 @@ router.post('/bids', async (req, res) => {
         [newBid.user_id, newBid.houses_id, newBid.price]
     );
 
-    res.status(200).send();
+    res.status(201).send();
 });
 
 // Exports router so it can be used in main server
