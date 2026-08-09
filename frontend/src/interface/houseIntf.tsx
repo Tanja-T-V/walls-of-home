@@ -12,6 +12,7 @@ export interface Houses {
     exterior: string;
     description: string;
     publiched: string;
+    tags: string[];
 }
 
 export interface HouseData {

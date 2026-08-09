@@ -50,6 +50,15 @@ interface BidHouses {
     price: number;
 }
 
+interface HousetagsId {
+    housetag_id: number;
+    houses_id: number;
+}
+
+interface HouseTags {
+    tag: string;
+}
+
 //----- Houses ----
 
 router.get('/houses', async (_req, res) => {

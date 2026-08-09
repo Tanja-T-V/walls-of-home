@@ -2,22 +2,20 @@
     To read file in terminal do: \i database.sql
     Comando work also when render is used.
 
-    If letters look wrong with åäö in database then it didnt read as UTF8.
-    Run: SHOW client_encoding
+    If letters look wrong with åäö in database then it didnt read as UTF8. Run this inside Prosgresql:
+    Run: SHOW client_encoding;
     If  ex on windows it says "WIN1252" its wrong settings.
-    Run: SET client_encoding TO 'UTF8'
+    Run: SET client_encoding TO 'UTF8';
     Read again and it should say UFT8 and the letters should work again.
 */
 
 -- Tables with foregin keys
-DROP TABLE IF EXISTS houses_tags;
 DROP TABLE IF EXISTS userfavs;
 DROP TABLE IF EXISTS userbids;
 
 -- Tables without FK
 DROP TABLE IF EXISTS accounts;
 DROP TABLE IF EXISTS houses;
-DROP TABLE IF EXISTS housestags;
 
 CREATE TABLE accounts (
     id SERIAL PRIMARY KEY,
@@ -39,18 +37,8 @@ CREATE TABLE houses (
     parking TEXT NOT NULL CHECK (length(parking) > 0),
     exterior TEXT NOT NULL DEFAULT 'No exterior',
     description TEXT NOT NULL DEFAULT 'No description',
-    publiched DATE NOT NULL DEFAULT CURRENT_DATE
-);
-
-CREATE TABLE housestags (
-    id SERIAL PRIMARY KEY,
-    tag TEXT NOT NULL UNIQUE CHECK (length(tag) > 0)
-);
-
-CREATE TABLE houses_tags (
-    id SERIAL PRIMARY KEY,
-    housetag_id INTEGER REFERENCES housestags(id),
-    houses_id INTEGER REFERENCES houses(id)
+    publiched DATE NOT NULL DEFAULT CURRENT_DATE,
+    tags TEXT[]
 );
 
 CREATE TABLE userfavs (
@@ -76,36 +64,10 @@ INSERT INTO accounts (username, password) VALUES ('Alice', 'test123');
 INSERT INTO accounts (username, password) VALUES ('Lena', 'DoggosExtreme');
 INSERT INTO accounts (username, password) VALUES ('Anderos', 'CakeIsALie');
 
-INSERT INTO houses (start_price, city, address, property_type, living_area, rooms, build_year, parking, exterior, description ) VALUES (5120000, 'Linköping', 'Ekbackevägen 22, 582 45 Linköping', 'House', '155 m2', 6, 1994, 'Garage', 'Backyard', 'A spacious family villa located in a quiet residential area. The home offers bright living spaces, a large garden, and excellent outdoor areas for entertaining.');
-INSERT INTO houses (start_price, city, address, property_type, living_area, rooms, build_year, parking, exterior, description ) VALUES (3450000, 'Gothenburg', 'Linnégatan 18C, 413 04 Gothenburg', 'Apartment', '72 m2', 3, 2016, 'Rent parking', 'Balcony', 'Modern apartment in a vibrant city district with open-plan design, balcony, and access to a shared rooftop terrace.');
-INSERT INTO houses (start_price, city, address, property_type, living_area, rooms, build_year, parking, exterior, description ) VALUES (6780000, 'Växjo', 'Björkås Gård 7, 355 91 Växjö', 'Farm', '210 m2', 7, 1923, 'Garage', 'Farmland', 'A charming countryside farm with renovated main house, extensive land, and peaceful surroundings close to nature.');
-INSERT INTO houses (start_price, city, address, property_type, living_area, rooms, build_year, parking, exterior, description ) VALUES (3980000, 'Malmö', 'Rosengången 11, 217 63 Malmö', 'House', '118 m2', 5, 2007, 'Private parking', 'Backyard', 'Well-planned townhouse with private outdoor spaces, located in a family-friendly neighborhood with good city access.');
-
-INSERT INTO housestags (tag) VALUES ('Pool');
-INSERT INTO housestags (tag) VALUES ('Elevator');
-INSERT INTO housestags (tag) VALUES ('Fireplace');
-INSERT INTO housestags (tag) VALUES ('Walk-in closet');
-INSERT INTO housestags (tag) VALUES ('Sea view');
-INSERT INTO housestags (tag) VALUES ('Newly renovated');
-INSERT INTO housestags (tag) VALUES ('Family friendly');
-INSERT INTO housestags (tag) VALUES ('Central location');
-INSERT INTO housestags (tag) VALUES ('Smart home');
-
-INSERT INTO houses_tags (housetag_id, houses_id) VALUES ( 3, 1);
-INSERT INTO houses_tags (housetag_id, houses_id) VALUES ( 9, 1);
-
-INSERT INTO houses_tags (housetag_id, houses_id) VALUES ( 2, 2);
-INSERT INTO houses_tags (housetag_id, houses_id) VALUES ( 4, 2);
-INSERT INTO houses_tags (housetag_id, houses_id) VALUES ( 8, 2);
-INSERT INTO houses_tags (housetag_id, houses_id) VALUES ( 9, 2);
-
-INSERT INTO houses_tags (housetag_id, houses_id) VALUES ( 3, 3);
-INSERT INTO houses_tags (housetag_id, houses_id) VALUES ( 5, 3);
-INSERT INTO houses_tags (housetag_id, houses_id) VALUES ( 6, 3);
-
-INSERT INTO houses_tags (housetag_id, houses_id) VALUES ( 7, 4);
-INSERT INTO houses_tags (housetag_id, houses_id) VALUES ( 1, 4);
-INSERT INTO houses_tags (housetag_id, houses_id) VALUES ( 8, 4);
+INSERT INTO houses (start_price, city, address, property_type, living_area, rooms, build_year, parking, exterior, description, tags ) VALUES (5120000, 'Linköping', 'Ekbackevägen 22, 582 45 Linköping', 'House', '155 m2', 6, 1994, 'Garage', 'Backyard', 'A spacious family villa located in a quiet residential area. The home offers bright living spaces, a large garden, and excellent outdoor areas for entertaining.', '{"Fireplace", "Smart home"}');
+INSERT INTO houses (start_price, city, address, property_type, living_area, rooms, build_year, parking, exterior, description, tags) VALUES (3450000, 'Gothenburg', 'Linnégatan 18C, 413 04 Gothenburg', 'Apartment', '72 m2', 3, 2016, 'Rent parking', 'Balcony', 'Modern apartment in a vibrant city district with open-plan design, balcony, and access to a shared rooftop terrace.', '{"Elevator", "Walk-in closet", "Central location", "Smart home"}');
+INSERT INTO houses (start_price, city, address, property_type, living_area, rooms, build_year, parking, exterior, description, tags ) VALUES (6780000, 'Växjo', 'Björkås Gård 7, 355 91 Växjö', 'Farm', '210 m2', 7, 1923, 'Garage', 'Farmland', 'A charming countryside farm with renovated main house, extensive land, and peaceful surroundings close to nature.', '{"Fireplace", "Sea view", "Newly renovated"}');
+INSERT INTO houses (start_price, city, address, property_type, living_area, rooms, build_year, parking, exterior, description, tags ) VALUES (3980000, 'Malmö', 'Rosengången 11, 217 63 Malmö', 'House', '118 m2', 5, 2007, 'Private parking', 'Backyard', 'Well-planned townhouse with private outdoor spaces, located in a family-friendly neighborhood with good city access.','{"Family friendly", "Pool", "Central location"}');
 
 INSERT INTO userfavs (user_id, houses_id) VALUES ( 1, 1);
 INSERT INTO userfavs (user_id, houses_id) VALUES ( 1, 3);

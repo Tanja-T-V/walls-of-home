@@ -60,6 +60,16 @@ function HouseDisplay({ houses, isLoading }: Props) {
                         <p>Description</p>
                         <p>{house.description}</p>
                     </div>
+                    <div>
+                        {house.tags.map((tag, i) => (
+                            <div
+                                key={i}
+                                className="p-2 m-2 border border-primary border-2 rounded-pill d-inline-block"
+                            >
+                                <p className="p-2 m-0">{tag}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             ))}
         </>
