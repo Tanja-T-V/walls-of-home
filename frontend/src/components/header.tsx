@@ -39,7 +39,7 @@ function Header() {
                                         <NavDropdown.Item
                                             onClick={handleLoggout}
                                         >
-                                            Logout
+                                            Log out
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                 </>

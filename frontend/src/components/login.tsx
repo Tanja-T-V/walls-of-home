@@ -46,7 +46,7 @@ function Login({
 
                 <Stack gap={6}>
                     <Button className="my-3" onClick={onLogin}>
-                        Login
+                        Log in
                     </Button>
                     <Button
                         className="my-3"
