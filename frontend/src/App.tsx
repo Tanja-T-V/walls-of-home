@@ -15,7 +15,7 @@ import AboutPage from './views/aboutPage';
 import { Container } from 'react-bootstrap';
 import { AuthProvider } from './context/authContext';
 
-import './App.css';
+import './style/App.scss';
 
 // Dont forget # its ex: /#/mypage
 

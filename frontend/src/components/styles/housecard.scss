@@ -1,0 +1,15 @@
+@use '../../style/App.scss' as *;
+
+.housecards {
+    background-color: $prim-card-col;
+    border-radius: $border-radius;
+    width: 340px;
+
+    border-style: solid;
+    border-color: $prim-border-col;
+    border-width: 1px;
+}
+
+.housecards .p {
+    margin: 0;
+}

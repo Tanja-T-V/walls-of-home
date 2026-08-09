@@ -2,6 +2,7 @@ import { Nav, Container, Navbar, NavDropdown } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { useAuthContext } from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
+import './styles/header-footer.scss';
 
 function Header() {
     const { isLoggedIn, setIsLoggedIn, accName } = useAuthContext();
@@ -15,14 +16,16 @@ function Header() {
 
     return (
         <header className="Header">
-            <Navbar expand="lg">
+            <Navbar expand="lg" className="navbar-style">
                 <Container>
                     <Navbar.Toggle aria-controls="basic-navbar.nav" />
                     <Navbar.Collapse id="basic-navbar.nav">
                         <Nav className="me-auto">
                             {isLoggedIn ? (
                                 <>
-                                    <p className="mx-4">Welcome {accName}</p>
+                                    <p className="m-2">
+                                        Welcome <b>{accName}</b>
+                                    </p>
 
                                     <Nav.Link href="#start">Start</Nav.Link>
                                     <Nav.Link href="#likes">Liked</Nav.Link>

@@ -4,6 +4,8 @@ import { Spinner, Button } from 'react-bootstrap';
 import type { Houses, BidHouses } from '../interface/houseIntf';
 import { useNavigate } from 'react-router-dom';
 
+import './styles/bidcard.scss';
+
 type Props = {
     houses: Houses[];
     bidhouses: BidHouses[];

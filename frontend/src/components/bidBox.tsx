@@ -3,6 +3,8 @@ import { Button, Form, Row, Col } from 'react-bootstrap';
 import type React from 'react';
 import { useState } from 'react';
 
+import './styles/bidBox.scss';
+
 type Props = {
     onBidding: () => void;
     setBidOffer: React.Dispatch<React.SetStateAction<string>>;

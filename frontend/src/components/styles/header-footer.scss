@@ -1,0 +1,40 @@
+@use '../../style/App.scss' as *;
+
+.Header {
+    background-color: $prim-back-col;
+
+    margin: 0;
+    padding-block: clamp(1rem, 2vw, 2rem);
+    padding-inline: clamp(1rem, 4vw, 3rem);
+
+    border-style: solid;
+    border-color: $prim-border-col;
+    border-width: 0 0 1px 0;
+
+    box-shadow: 0 0 10px 0 $acc-opac-col;
+}
+
+.Footer {
+    background-color: $prim-dark-col;
+    color: $prim-light-col;
+
+    margin: 0;
+    padding-block: clamp(2rem, 4vw, 4rem);
+    padding-inline: clamp(1rem, 4vw, 3rem);
+
+    box-shadow: 10px 0 0 0 $acc-opac-col;
+}
+
+.navbar-style .navbar-collapse {
+    margin-top: 0.4rem;
+    margin-left: auto;
+    border-radius: $border-radius;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-style .navbar-collapse .nav-link {
+    padding: 0.5rem 0.7rem;
+}
+.navbar-style .navbar-collapse .nav-link:hover {
+    background-color: #f1f5f9;
+}

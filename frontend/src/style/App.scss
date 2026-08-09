@@ -1,0 +1,87 @@
+$prim-back-col: #eff1ee;
+$prim-card-col: #ffffff;
+
+$prim-col: #52666a;
+$prim-hover-col: #405459;
+$sec-col: #89999a;
+$sec-hover-col: #718385;
+
+$acc-col: #a38c70;
+$acc-opac-col: rgba(163, 140, 112, 0.2);
+$prim-dark-col: #293234;
+$prim-light-col: #f7f9f7;
+
+$prim-border-col: #d3d9d7;
+$input-col: #fbfcfa;
+
+$border-radius: 0.5rem;
+
+body {
+    background-color: $prim-back-col;
+    color: $prim-dark-col;
+}
+
+.primarybtn {
+    background-color: $prim-col;
+    border-color: $prim-col;
+
+    &:hover {
+        background-color: $prim-hover-col;
+        border-color: $prim-hover-col;
+    }
+
+    &:focus {
+        background-color: $prim-col;
+        border-color: $prim-col;
+    }
+
+    &:active {
+        background-color: $prim-hover-col !important;
+        border-color: $prim-hover-col !important;
+    }
+
+    &:disabled {
+        background-color: #636263;
+        border-color: #636263;
+    }
+}
+
+.secondarybtn {
+    background-color: $sec-col;
+    border-color: $sec-col;
+
+    &:hover {
+        background-color: $sec-hover-col;
+        border-color: $sec-hover-col;
+    }
+
+    &:focus {
+        background-color: $sec-col;
+        border-color: $sec-col;
+    }
+
+    &:active {
+        background-color: $sec-hover-col !important;
+        border-color: $sec-hover-col !important;
+    }
+
+    &:disabled {
+        background-color: #636263;
+        border-color: #636263;
+    }
+}
+
+.input-form {
+    background-color: $input-col;
+    color: $prim-dark-col;
+    border-color: $prim-border-col;
+
+    &:focus {
+        border-color: $prim-col;
+        box-shadow: 0 0 0 0.2rem $acc-opac-col;
+    }
+}
+
+.icon-color {
+    color: $acc-col;
+}

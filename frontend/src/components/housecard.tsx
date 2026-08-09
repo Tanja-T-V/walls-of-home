@@ -1,5 +1,7 @@
 import { Spinner, Button } from 'react-bootstrap';
+import { HouseDoorFill } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
+import './styles/housecard.scss';
 
 // Interface
 import type { Houses } from '../interface/houseIntf';
@@ -45,9 +47,15 @@ function HouseCards({ houses, isLoading }: Props) {
     return (
         <>
             {houseClean.map((house) => (
-                <div key={house.id} className="housecards">
-                    <p>{house.address}</p>
-                    <p>City: {house.city}</p>
+                <div
+                    key={house.id}
+                    className="housecards mx-3 my-4 p-3 d-flex flex-column"
+                >
+                    <p className="fw-bold">{house.address}</p>
+                    <div className="d-flex align-items-center gap-2">
+                        <HouseDoorFill className="icon-color" />
+                        {house.city}
+                    </div>
                     <div>
                         <p>Living area: {house.living_area}</p>
                         <p>Rooms: {house.rooms}</p>
@@ -59,7 +67,7 @@ function HouseCards({ houses, isLoading }: Props) {
                         <p>{house.description}</p>
                     </div>
                     <Button
-                        variant="primary"
+                        className="primarybtn mt-auto"
                         onClick={() => handleHouseMore(house.id)}
                     >
                         More..

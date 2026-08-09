@@ -1,0 +1,19 @@
+@use '../../style/App.scss' as *;
+
+.loginbox {
+    background-color: $input-col;
+    max-width: 100%;
+    border-radius: $border-radius;
+}
+
+@media (min-width: 720px) {
+    .loginbox {
+        max-width: 70%;
+    }
+}
+
+@media (min-width: 960px) {
+    .loginbox {
+        max-width: 50%;
+    }
+}
