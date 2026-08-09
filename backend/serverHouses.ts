@@ -20,6 +20,7 @@ interface Houses {
     exterior: string;
     description: string;
     publiched: string;
+    tags: string[];
 }
 
 interface FavHouses {
@@ -35,10 +36,6 @@ interface FavHousExsists {
     exists: boolean;
 }
 
-interface User {
-    user_id: number;
-}
-
 interface HouseFavID {
     houses_id: number[];
 }
@@ -48,15 +45,6 @@ interface BidHouses {
     user_id: number;
     houses_id: number;
     price: number;
-}
-
-interface HousetagsId {
-    housetag_id: number;
-    houses_id: number;
-}
-
-interface HouseTags {
-    tag: string;
 }
 
 //----- Houses ----
