@@ -1,0 +1,14 @@
+@use '../style/App.scss' as *;
+
+.like-box {
+    background-color: $prim-sec-col;
+}
+
+.header-text-like {
+    width: clamp(16rem, 90vw, 40rem);
+    margin-inline: auto;
+}
+
+.text-like {
+    color: $text-dark-col;
+}

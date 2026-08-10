@@ -1,0 +1,12 @@
+@use '../style/App.scss' as *;
+
+.header-box {
+    background-color: $prim-col;
+    color: $prim-light-col;
+    height: clamp(9rem, 10vw, 20rem);
+}
+
+.header-text {
+    width: clamp(16rem, 90vw, 40rem);
+    margin-inline: auto;
+}

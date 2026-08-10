@@ -1,4 +1,13 @@
 import { Spinner } from 'react-bootstrap';
+import './styles/housedisplay.scss';
+import {
+    HousesFill,
+    DoorOpenFill,
+    ArrowsAngleExpand,
+    Calendar2WeekFill,
+} from 'react-bootstrap-icons';
+
+import LikeButton from '../components/likeButton';
 
 // Interface
 import type { Houses } from '../interface/houseIntf';
@@ -6,9 +15,11 @@ import type { Houses } from '../interface/houseIntf';
 type Props = {
     houses: Houses[];
     isLoading: boolean;
+    handleLike: () => void;
+    isLiked: boolean;
 };
 
-function HouseDisplay({ houses, isLoading }: Props) {
+function HouseDisplay({ houses, isLoading, handleLike, isLiked }: Props) {
     // Removes leftovers form SQL DATE. Removes Timezone. 2026-05-26T00:00:00.000Z to 2026-05-26
     const houseClean = houses.map((house) => ({
         ...house,
@@ -39,36 +50,85 @@ function HouseDisplay({ houses, isLoading }: Props) {
     return (
         <>
             {houseClean.map((house) => (
-                <div key={house.id}>
-                    <p>
-                        Price: {house.start_price} {house.currency}
-                    </p>
-                    <p>City: {house.city}</p>
-                    <p>{house.address}</p>
-                    <p>Publiched: {house.publiched}</p>
-                    <div>
-                        <p>Housetype: {house.property_type}</p>
-                        <p>Living area: {house.living_area}</p>
-                        <p>Rooms: {house.rooms}</p>
-                        <p>Build year: {house.build_year}</p>
+                <div key={house.id} className="house-box d-flex flex-column">
+                    <p className="fs-3 fw-bold mb-2">{house.address}</p>
+
+                    <div className="mb-4 d-flex align-items-center gap-4">
+                        <p>{house.city}</p>
+                        <div className="ms-auto">
+                            <LikeButton onLike={handleLike} isLiked={isLiked} />
+                        </div>
                     </div>
-                    <div>
-                        <p>Parking: {house.parking}</p>
-                        <p>Exterior: {house.exterior}</p>
+
+                    <div className="mb-2 d-flex align-items-center gap-4">
+                        <div className="my-1 d-flex align-items-center gap-1">
+                            <p>Price: </p>
+                            <p className="fw-bold">
+                                {house.start_price} {house.currency}
+                            </p>
+                        </div>
+                        <p className="fw-light ms-auto">
+                            Publiched: {house.publiched}
+                        </p>
                     </div>
-                    <div>
-                        <p>Description</p>
-                        <p>{house.description}</p>
+
+                    <div className="mb-3">
+                        <div className="mb-2 d-flex align-items-center gap-2">
+                            <HousesFill className="icon-dark-color" />
+                            <p>Property type </p>
+                            <p className="ms-auto fw-bold">
+                                {house.property_type}
+                            </p>
+                        </div>
+                        <div className="mb-2 d-flex align-items-center gap-2">
+                            <ArrowsAngleExpand className="icon-dark-color" />
+                            <p>Living area</p>
+                            <p className="ms-auto fw-bold">
+                                {house.living_area}
+                            </p>
+                        </div>
+                        <div className="mb-2 d-flex align-items-center gap-2">
+                            <DoorOpenFill className="icon-dark-color" />
+                            <p>Rooms</p>
+                            <p className="ms-auto fw-bold"> {house.rooms}</p>
+                        </div>
+
+                        <div className="mb-2 d-flex align-items-center gap-2">
+                            <Calendar2WeekFill className="icon-dark-color" />
+                            <p>Build year </p>
+                            <p className="ms-auto fw-bold">
+                                {house.build_year}
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        {house.tags.map((tag, i) => (
-                            <div
-                                key={i}
-                                className="p-2 m-2 border border-primary border-2 rounded-pill d-inline-block"
-                            >
-                                <p className="p-2 m-0">{tag}</p>
-                            </div>
-                        ))}
+
+                    <div className="text-description mb-3 p-3">
+                        <p className="mb-2 fw-bold">Extra details</p>
+                        <div className="mb-2 d-flex align-items-center gap-2">
+                            <p>Parking</p>
+                            <p className="ms-auto fw-bold">{house.parking}</p>
+                        </div>
+                        <div className="mb-2 d-flex align-items-center gap-2">
+                            <p>Exterior</p>
+                            <p className="ms-auto fw-bold">{house.exterior}</p>
+                        </div>
+
+                        <div className="my-3">
+                            <p className="fw-bold">Description</p>
+                            <p>{house.description}</p>
+                        </div>
+
+                        <div className="my-3">
+                            <p className="fw-bold">Other features</p>
+                            {house.tags.map((tag, i) => (
+                                <div
+                                    key={i}
+                                    className="tag-box p-2 m-2 border border-2 rounded-pill d-inline-block"
+                                >
+                                    <p className="p-1 m-0 fw-light">{tag}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             ))}

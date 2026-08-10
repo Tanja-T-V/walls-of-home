@@ -1,0 +1,14 @@
+@use '../style/App.scss' as *;
+
+.bid-box {
+    background-color: $prim-dark-col;
+    color: $prim-light-col;
+}
+.header-text-bid {
+    width: clamp(16rem, 90vw, 40rem);
+    margin-inline: auto;
+}
+
+.bid-text {
+    color: $text-light-col;
+}

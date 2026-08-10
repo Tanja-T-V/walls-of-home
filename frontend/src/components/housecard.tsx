@@ -1,5 +1,5 @@
 import { Spinner, Button } from 'react-bootstrap';
-import { HouseDoorFill } from 'react-bootstrap-icons';
+import { HouseDoorFill, Dot } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import './styles/housecard.scss';
 
@@ -51,19 +51,28 @@ function HouseCards({ houses, isLoading }: Props) {
                     key={house.id}
                     className="housecards mx-3 my-4 p-3 d-flex flex-column"
                 >
-                    <p className="fw-bold">{house.address}</p>
-                    <div className="d-flex align-items-center gap-2">
+                    <p className="fw-bold mb-2">{house.address}</p>
+
+                    <div className="mb-2 d-flex align-items-center gap-2">
                         <HouseDoorFill className="icon-color" />
-                        {house.city}
+                        <p>{house.city}</p>
                     </div>
-                    <div>
-                        <p>Living area: {house.living_area}</p>
-                        <p>Rooms: {house.rooms}</p>
+                    <div className="mb-2 d-flex align-items-center gap-3">
+                        <div className=" d-flex align-items-center gap-1">
+                            <Dot />
+                            <p>{house.living_area}</p>
+                        </div>
+                        <div className=" d-flex align-items-center gap-1">
+                            <Dot />
+                            <p>{house.rooms} rooms</p>
+                        </div>
                     </div>
-                    <p>
-                        Price: {house.start_price} {house.currency}
-                    </p>
-                    <div>
+                    <div className="my-1 d-flex align-items-center gap-1">
+                        <p className="fw-bold">
+                            Price: {house.start_price} {house.currency}
+                        </p>
+                    </div>
+                    <div className="mt-1 mb-4">
                         <p>{house.description}</p>
                     </div>
                     <Button

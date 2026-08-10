@@ -1,6 +1,7 @@
 $prim-back-col: #eff1ee;
 $prim-card-col: #ffffff;
 
+// ---- For buttons ----
 $prim-col: #52666a;
 $prim-hover-col: #405459;
 $sec-col: #89999a;
@@ -8,12 +9,21 @@ $sec-hover-col: #718385;
 
 $acc-col: #a38c70;
 $acc-opac-col: rgba(163, 140, 112, 0.2);
+
+// --- For text ----
 $prim-dark-col: #293234;
 $prim-light-col: #f7f9f7;
+$text-dark-col: #737e80;
+$text-light-col: #c3ccca;
 
-$prim-border-col: #d3d9d7;
+//-- Input --
 $input-col: #fbfcfa;
 
+// --- Extra background colors ---
+$prim-sec-col: #e8dfd3;
+
+// --- Borders ---
+$prim-border-col: #d3d9d7;
 $border-radius: 0.5rem;
 
 body {
@@ -36,8 +46,8 @@ body {
     }
 
     &:active {
-        background-color: $prim-hover-col !important;
-        border-color: $prim-hover-col !important;
+        background-color: $prim-col !important;
+        border-color: $prim-col !important;
     }
 
     &:disabled {
@@ -84,4 +94,8 @@ body {
 
 .icon-color {
     color: $acc-col;
+}
+
+.icon-dark-color {
+    color: $prim-dark-col;
 }

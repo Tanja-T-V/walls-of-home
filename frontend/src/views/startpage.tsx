@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Housecard from '../components/housecard';
 import { useAuthContext } from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
+import '../style/Startpage.scss';
 
 // House interfaces
 import type { Houses } from '../interface/houseIntf';
@@ -36,8 +37,10 @@ function StartPage() {
 
     return (
         <>
-            <div className="m-5">
-                <p>Properties for sale!</p>
+            <div className="header-box py-3 px-5 mb-3 d-flex flex-column align-items-center text-center">
+                <p className="header-text fs-1 fw-light w-100">
+                    Find The Walls You'll Call Home
+                </p>
             </div>
             <div className="d-flex flex-wrap justify-content-center">
                 <Housecard houses={houses} isLoading={isLoading} />

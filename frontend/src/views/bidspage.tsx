@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
+import '../style/BidPage.scss';
 
 import BidCards from '../components/bidcard';
 import type { Houses, BidHouses } from '../interface/houseIntf';
@@ -66,14 +67,35 @@ function BidPage() {
 
     return (
         <>
-            <h2>Bid page</h2>
-            <div className="d-flex flex-wrap justify-content-center">
-                <BidCards
-                    houses={houses}
-                    bidhouses={userBids}
-                    isLoading={isLoading}
-                />
+            <div className="bid-box p-3 mb-3 d-flex flex-column align-items-center text-center">
+                <p className="header-text-bid fs-1 fw-light mb-2 w-100">
+                    Bids & offers
+                </p>
+                <p className="bid-text fs-6 fw-lighter w-100">
+                    Follow your active bids and keep track of the homes you're
+                    intressted in.
+                </p>
             </div>
+
+            {houses.length === 0 && (
+                <div className="p-3 mb-3 d-flex flex-column align-items-center text-center">
+                    <p className=" fs-1 fw-light mb-2 w-100">No bids yet</p>
+                    <p className=" fs-6 fw-lighter w-100">
+                        Found a place you love? Whne you're ready, you can make
+                        an offer and follow it here.
+                    </p>
+                </div>
+            )}
+
+            {houses.length > 0 && (
+                <div className="d-flex flex-wrap justify-content-center">
+                    <BidCards
+                        houses={houses}
+                        bidhouses={userBids}
+                        isLoading={isLoading}
+                    />
+                </div>
+            )}
         </>
     );
 }

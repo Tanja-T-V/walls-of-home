@@ -1,7 +1,21 @@
 @use '../../style/App.scss' as *;
 
 .bidcard {
-    background-color: cornflowerblue;
-    margin: 1rem;
+    background-color: $prim-card-col;
+    border-radius: $border-radius;
     width: 340px;
+
+    border-style: solid;
+    border-color: $prim-border-col;
+    border-width: 1px;
+}
+
+.bidcard p {
+    margin: 0;
+    padding: 0;
+}
+
+.activebid {
+    border-radius: 0.5rem;
+    background-color: $prim-sec-col;
 }

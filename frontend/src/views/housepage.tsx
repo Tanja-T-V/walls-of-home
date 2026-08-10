@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuthContext } from '../context/authContext';
+import '../style/Housepage.scss';
 
 // Components
 import HouseDisplay from '../components/houseDisplay';
-import LikeButton from '../components/likeButton';
 import BidBox from '../components/bidBox';
 
 // Interface
@@ -81,18 +81,20 @@ function HousePage() {
     }, [isLoggedIn]);
 
     return (
-        <>
-            <h2>Specific house</h2>
-            <div className="m-5">
-                <HouseDisplay houses={house} isLoading={isLoading} />
+        <div className="my-5 mx-2 p-2">
+            <div>
+                <HouseDisplay
+                    houses={house}
+                    isLoading={isLoading}
+                    handleLike={handleLike}
+                    isLiked={isLiked}
+                />
             </div>
-            <div className="m-2">
-                <LikeButton onLike={handleLike} isLiked={isLiked} />
-            </div>
+
             <div>
                 <BidBox onBidding={handleBid} setBidOffer={setBidOffer} />
             </div>
-        </>
+        </div>
     );
 }
 

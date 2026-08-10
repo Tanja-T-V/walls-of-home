@@ -2,6 +2,7 @@
 
 .Header {
     background-color: $prim-back-col;
+    color: $prim-dark-col;
 
     margin: 0;
     padding-block: clamp(1rem, 2vw, 2rem);
@@ -34,7 +35,20 @@
 
 .navbar-style .navbar-collapse .nav-link {
     padding: 0.5rem 0.7rem;
-}
-.navbar-style .navbar-collapse .nav-link:hover {
-    background-color: #f1f5f9;
+
+    &:hover {
+        background-color: $prim-col;
+        color: $prim-light-col;
+        border-style: solid;
+        border-color: $prim-border-col;
+        border-width: 1px;
+    }
+
+    &:active {
+        background-color: $prim-col;
+        color: $prim-light-col;
+        border-style: solid;
+        border-color: $prim-border-col;
+        border-width: 1px;
+    }
 }

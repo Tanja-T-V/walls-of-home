@@ -1,4 +1,5 @@
 import { Button } from 'react-bootstrap';
+import { Heart, HeartFill } from 'react-bootstrap-icons';
 
 type Props = {
     onLike: () => void;
@@ -8,7 +9,7 @@ type Props = {
 function LikeButton({ onLike, isLiked }: Props) {
     return (
         <>
-            <Button variant="primary" onClick={onLike}>
+            <Button className="primarybtn" onClick={onLike}>
                 {isLiked === false ? 'Like' : 'Unlike'}
             </Button>
         </>

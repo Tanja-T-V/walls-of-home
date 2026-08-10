@@ -8,7 +8,7 @@ import Header from './components/header';
 import Footer from './components/footer';
 import LoginPage from './views/loginpage';
 import StartPage from './views/startpage';
-import MyLikePage from './views/mylikes';
+import MyLikePage from './views/likespage';
 import BidPage from './views/bidspage';
 import HousePage from './views/housepage';
 import AboutPage from './views/aboutPage';

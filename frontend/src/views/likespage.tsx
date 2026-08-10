@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
+import '../style/LikedPage.scss';
 
 import Housecard from '../components/housecard';
 
@@ -69,13 +70,34 @@ function MylikesPage() {
     }, [isLoggedIn]);
 
     return (
-        <div>
-            <p>My liked houses</p>
-            <p>USer liked API:</p>
-            <div className="d-flex flex-wrap justify-content-center">
-                <Housecard houses={houses} isLoading={isLoading} />
+        <>
+            <div className="like-box p-3 mb-3 d-flex flex-column align-items-center text-center">
+                <p className="header-text-like fs-1 fw-light mb-2 w-100">
+                    Your Favourites Homes
+                </p>
+                <p className="text-like fs-6 fw-lighter w-100">
+                    A collection of homes you might call your own.
+                </p>
             </div>
-        </div>
+
+            {houses.length === 0 && (
+                <div className="p-3 mb-3 d-flex flex-column align-items-center text-center">
+                    <p className=" fs-1 fw-light mb-2 w-100">
+                        No favourites yet
+                    </p>
+                    <p className=" fs-6 fw-lighter w-100">
+                        Your favourite homes will appear here when you find one
+                        worth keeping.
+                    </p>
+                </div>
+            )}
+
+            {houses.length > 0 && (
+                <div className=" d-flex flex-wrap justify-content-center">
+                    <Housecard houses={houses} isLoading={isLoading} />
+                </div>
+            )}
+        </>
     );
 }
 
