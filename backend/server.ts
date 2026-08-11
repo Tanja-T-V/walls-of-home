@@ -5,7 +5,8 @@ import apiHouses from './serverHouses.js';
 import apiLogin from './serverLogin.js';
 
 // Creates app.
-const app = express();
+const app = express(),
+    port = process.env.PORT || 8080;
 
 // Corse fix
 app.use(cors());
@@ -19,6 +20,6 @@ app.use('/login', apiLogin);
 app.use('/userfavs', apiHouses);
 
 // ---- App listen ---
-app.listen(8080, () => {
-    console.log('Redo på 8080');
+app.listen(port, () => {
+    console.log('Redo på localhost: ', port);
 });

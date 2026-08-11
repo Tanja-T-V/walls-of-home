@@ -67,9 +67,10 @@ function HousePage() {
             body: JSON.stringify(bidInfo),
             headers: { 'Content-Type': 'application/json' },
             method: 'POST',
-        }).then((response) => {
-            console.log('response bid', response.status);
         });
+        /*.then((response) => {
+            console.log('response bid', response.status);
+        })*/
     }
 
     // If user isnt logged in gets redirested to start.
