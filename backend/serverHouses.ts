@@ -98,7 +98,7 @@ router.post('/houses', async (req, res) => {
     if (!('houses_id' in houseID)) {
         return res.status(400).send('Missing body information');
     } else {
-        const { rows, rowCount }: QueryResult<Houses> = await database.query(
+        const { rows }: QueryResult<Houses> = await database.query(
             'SELECT * FROM houses WHERE id = ANY($1)',
             [[houseID.houses_id]]
         );
