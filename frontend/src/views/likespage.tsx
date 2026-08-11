@@ -24,40 +24,40 @@ function MylikesPage() {
                 setUserFavs(data);
             })
             .finally(() => {});
-    }, []);
+    }, [userInfo]);
 
-    // Does a post to get all houses with matching id
-    async function getFavHouses() {
-        // Make array from userfavs.house_id
-        const wantedHousID = {
-            houses_id: userfavs.map((fav) => fav.houses_id),
-        };
-
-        try {
-            const res = await fetch('http://localhost:8080/houses/houses', {
-                body: JSON.stringify(wantedHousID),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                method: 'POST',
-            });
-
-            if (res.status === 201) {
-                const data: Houses[] = await res.json();
-                setHouses(data);
-                setIsLoading(false);
-
-                return;
-            } else {
-                return;
-            }
-        } catch (error) {
-            console.log('Backend Error');
-        }
-    }
-
-    // Looks on userfavs if it updates, runs function that gets the userfavs houses.
+    // Looks on userfavs if it updates. Contains a const fetch that get run.
     useEffect(() => {
+        // Does a post to get all houses with matching id
+        const getFavHouses = async () => {
+            // Make array from the fetching of userfavs.house_id
+            const wantedHousID = {
+                houses_id: userfavs.map((fav) => fav.houses_id),
+            };
+
+            try {
+                const res = await fetch('http://localhost:8080/houses/houses', {
+                    body: JSON.stringify(wantedHousID),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    method: 'POST',
+                });
+                // Sets Houses with the data and changes loading to false
+                if (res.status === 201) {
+                    const data: Houses[] = await res.json();
+                    setHouses(data);
+                    setIsLoading(false);
+
+                    return;
+                } else {
+                    return;
+                }
+            } catch (error) {
+                // Gives error if somethign went wrong
+                console.error(error);
+            }
+        };
         getFavHouses();
     }, [userfavs]);
 
@@ -67,7 +67,7 @@ function MylikesPage() {
         if (!isLoggedIn) {
             navigate('/');
         }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, navigate]);
 
     return (
         <>

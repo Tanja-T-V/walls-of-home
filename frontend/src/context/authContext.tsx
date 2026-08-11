@@ -1,12 +1,7 @@
-import {
-    createContext,
-    useContext,
-    useState,
-    type PropsWithChildren,
-} from 'react';
+import { createContext, useContext, useState } from 'react';
 
 // Defines context and makes default values. Uses houses interface and defines isLoading ad boolean. Basicly contians
-const authContext = createContext<{
+type AuthContextType = {
     isLoggedIn: boolean;
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
     accID: number | null;
@@ -15,10 +10,16 @@ const authContext = createContext<{
     setAccName: React.Dispatch<React.SetStateAction<string>>;
     logginErr: boolean;
     setLogginErr: React.Dispatch<React.SetStateAction<boolean>>;
-} | null>(null);
+};
+const authContext = createContext<AuthContextType | null>(null);
+
+// Authprovedier types
+type AuthProviderProps = {
+    children: React.ReactNode;
+};
 
 // Gets used in app.tsx
-export const AuthProvider = ({ children }: PropsWithChildren<{}>) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [accID, setAccID] = useState<number | null>(null);
     const [accName, setAccName] = useState<string>('');

@@ -21,39 +21,39 @@ function BidPage() {
                 setUserBids(data);
             })
             .finally(() => {});
-    }, []);
+    }, [userInfo]);
 
-    async function getBidHouses() {
-        // Make array from userfavs.house_id
-        const wantedHousID = {
-            houses_id: userBids.map((bid) => bid.houses_id),
+    // Looks on userfavs if it updates. Runs const function and either does insert or update depending if there is already a bid on the house.
+    useEffect(() => {
+        const getBidHouses = async () => {
+            // Make array from userfavs.house_id
+            const wantedHousID = {
+                houses_id: userBids.map((bid) => bid.houses_id),
+            };
+
+            try {
+                const res = await fetch('http://localhost:8080/houses/houses', {
+                    body: JSON.stringify(wantedHousID),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    method: 'POST',
+                });
+
+                if (res.status === 201) {
+                    const data: Houses[] = await res.json();
+                    setHouses(data);
+                    setIsLoading(false);
+
+                    return;
+                } else {
+                    return;
+                }
+            } catch (error) {
+                console.error(error);
+            }
         };
 
-        try {
-            const res = await fetch('http://localhost:8080/houses/houses', {
-                body: JSON.stringify(wantedHousID),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                method: 'POST',
-            });
-
-            if (res.status === 201) {
-                const data: Houses[] = await res.json();
-                setHouses(data);
-                setIsLoading(false);
-
-                return;
-            } else {
-                return;
-            }
-        } catch (error) {
-            console.log('Backend Error');
-        }
-    }
-
-    // Looks on userfavs if it updates, runs function that gets the userfavs houses.
-    useEffect(() => {
         getBidHouses();
     }, [userBids]);
 
@@ -63,7 +63,7 @@ function BidPage() {
         if (!isLoggedIn) {
             navigate('/');
         }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, navigate]);
 
     return (
         <>

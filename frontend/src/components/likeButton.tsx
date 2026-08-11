@@ -1,5 +1,4 @@
 import { Button } from 'react-bootstrap';
-import { Heart, HeartFill } from 'react-bootstrap-icons';
 
 type Props = {
     onLike: () => void;

@@ -48,7 +48,7 @@ function LoginPage() {
                 return;
             }
         } catch (error) {
-            console.log('Backend Error');
+            console.error(error);
         }
     }
 
@@ -60,7 +60,7 @@ function LoginPage() {
         if (isLoggedIn) {
             navigate('/start');
         }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, navigate]);
 
     return (
         <Container className="d-flex justify-content-center my-5">

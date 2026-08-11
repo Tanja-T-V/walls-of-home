@@ -32,7 +32,7 @@ function HousePage() {
             .finally(() => {
                 setIsLoading(false);
             });
-    }, []);
+    }, [houseid, accID]);
 
     // ---- Handels like ----
     function handleLike() {
@@ -78,7 +78,7 @@ function HousePage() {
         if (!isLoggedIn) {
             navigate('/');
         }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, navigate]);
 
     return (
         <div className="my-5 mx-2 p-2">

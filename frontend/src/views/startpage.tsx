@@ -33,7 +33,7 @@ function StartPage() {
         if (!isLoggedIn) {
             navigate('/');
         }
-    }, [isLoggedIn]);
+    }, [isLoggedIn, navigate]);
 
     return (
         <>
