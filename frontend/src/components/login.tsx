@@ -24,7 +24,7 @@ function Login({
 
     return (
         <Container className="loginbox p-3">
-            <Form>
+            <Form onSubmit={onLogin}>
                 <Form.Group className="mb-3" controlId="usernameLogin">
                     <Form.Label>Username</Form.Label>
                     <Form.Control
