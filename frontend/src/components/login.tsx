@@ -24,7 +24,7 @@ function Login({
 
     return (
         <Container className="loginbox p-3">
-            <Form onSubmit={onLogin}>
+            <Form>
                 <Form.Group className="mb-3" controlId="usernameLogin">
                     <Form.Label>Username</Form.Label>
                     <Form.Control
@@ -47,7 +47,11 @@ function Login({
                 )}
 
                 <Stack gap={6}>
-                    <Button className="my-3 primarybtn" type="submit">
+                    <Button
+                        className="my-3 primarybtn"
+                        type="submit"
+                        onClick={onLogin}
+                    >
                         Log in
                     </Button>
                     <Button
