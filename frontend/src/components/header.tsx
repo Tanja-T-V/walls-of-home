@@ -48,6 +48,8 @@ function Header() {
                                 </>
                             ) : (
                                 <>
+                                    <Nav.Link href="/">Log in</Nav.Link>
+
                                     <Nav.Link href="#about">About</Nav.Link>
                                 </>
                             )}

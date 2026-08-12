@@ -15,7 +15,7 @@ function BidBox({ onBidding, setBidOffer }: Props) {
 
     return (
         <div className="bidBox p-3">
-            <p>Intressted? Make an offer</p>
+            <p>Interested? Make an offer</p>
             <Container className="p-0">
                 <Form onSubmit={onBidding}>
                     <Form.Label>Your offer</Form.Label>

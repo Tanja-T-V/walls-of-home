@@ -9,7 +9,7 @@ type Props = {
     setUsername: React.Dispatch<React.SetStateAction<string>>;
     setPassword: React.Dispatch<React.SetStateAction<string>>;
     onLogin: () => void;
-    onCreate: () => void;
+    onRegister: () => void;
 };
 
 function Login({
@@ -17,7 +17,7 @@ function Login({
     setUsername,
     setPassword,
     onLogin,
-    onCreate,
+    onRegister,
 }: Props) {
     // For authContext
     const { logginErr } = useAuthContext();
@@ -53,8 +53,7 @@ function Login({
                     <Button
                         className="my-3 secondarybtn"
                         size="sm"
-                        disabled
-                        onClick={onCreate}
+                        onClick={onRegister}
                     >
                         Create Account
                     </Button>

@@ -12,6 +12,7 @@ import MyLikePage from './views/likespage';
 import BidPage from './views/bidspage';
 import HousePage from './views/housepage';
 import AboutPage from './views/aboutPage';
+import Register from './views/registerPage';
 import { Container } from 'react-bootstrap';
 import { AuthProvider } from './context/authContext';
 
@@ -24,6 +25,7 @@ function App() {
         {
             children: [
                 { element: <LoginPage />, path: '/' },
+                { element: <Register />, path: '/register' },
                 { element: <StartPage />, path: '/start' },
                 { element: <MyLikePage />, path: '/likes' },
                 { element: <BidPage />, path: '/bids' },

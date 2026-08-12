@@ -52,7 +52,8 @@ function LoginPage() {
         }
     }
 
-    function handleCreateAccount() {
+    function handleRegisterAccount() {
+        navigate('/register');
         console.log('Handeling creating account');
     }
 
@@ -69,7 +70,7 @@ function LoginPage() {
                 setUsername={setUsername}
                 setPassword={setPassword}
                 onLogin={handleLogin}
-                onCreate={handleCreateAccount}
+                onRegister={handleRegisterAccount}
             />
         </Container>
     );

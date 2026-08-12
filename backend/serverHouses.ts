@@ -108,7 +108,7 @@ router.post('/', async (req, res) => {
 });
 
 //----- FavHouses & Liked houses ----
-
+// Gets all the user liked houses
 router.get('/userfavs/:userdid', async (req, res) => {
     const user = req.params.userdid;
     const favHouses: QueryResult<FavHouses> = await database.query(
@@ -127,6 +127,7 @@ router.get('/userfavs/:userdid', async (req, res) => {
     }
 });
 
+// Favorrites or delete favourite from user
 router.post('/userfavs', async (req, res) => {
     const newFav: FavHouses = req.body;
 

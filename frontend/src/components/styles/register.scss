@@ -1,0 +1,8 @@
+@use '../../style/App.scss' as *;
+
+.registerErr {
+    border-radius: $border-radius;
+    border-style: solid;
+    border-color: red;
+    border-width: 2px;
+}

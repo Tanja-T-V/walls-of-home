@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS houses;
 CREATE TABLE accounts (
     id SERIAL PRIMARY KEY,
     username TEXT NOT NULL UNIQUE CHECK (length(username) > 3),
-    password VARCHAR NOT NULL CHECK(length(password) > 6)
+    password VARCHAR NOT NULL CHECK(length(password) >= 6)
 );
 
 -- DATE get automaticly including Timezone when read in Frontend JS
