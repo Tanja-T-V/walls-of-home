@@ -5,5 +5,4 @@ package-lock.json
 *.map
 *.d.ts
 
-database.js
 dist
