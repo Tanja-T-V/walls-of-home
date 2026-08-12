@@ -19,7 +19,7 @@ interface Login {
 */
 
 //----- Login ------
-router.post('/login', async (req, res) => {
+router.post('/', async (req, res) => {
     const user: Login = req.body;
 
     if (!('username' in user) || !('password' in user)) {

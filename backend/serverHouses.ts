@@ -49,7 +49,7 @@ interface BidHouses {
 
 //----- Houses ----
 
-router.get('/houses', async (_req, res) => {
+router.get('/', async (_req, res) => {
     // Adds interface to result
     const houses: QueryResult<Houses> = await database.query(
         'SELECT * FROM houses'
@@ -58,7 +58,7 @@ router.get('/houses', async (_req, res) => {
     res.status(200).send(houses.rows);
 });
 
-router.get('/houses/:houseid', async (req, res) => {
+router.get('/:houseid', async (req, res) => {
     const houseID = req.params.houseid;
     const userID = req.query.accID;
 
@@ -92,7 +92,7 @@ router.get('/houses/:houseid', async (req, res) => {
     }
 });
 
-router.post('/houses', async (req, res) => {
+router.post('/', async (req, res) => {
     const houseID: HouseFavID = req.body;
 
     if (!('houses_id' in houseID)) {

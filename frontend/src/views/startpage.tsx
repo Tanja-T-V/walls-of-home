@@ -16,7 +16,7 @@ function StartPage() {
 
     // Uses Houses interface and makse data use it.
     useEffect(() => {
-        fetch('http://localhost:8080/houses/houses')
+        fetch('/houses')
             .then((res) => res.json())
             .then((data: Houses[]) => {
                 setHouses(data);

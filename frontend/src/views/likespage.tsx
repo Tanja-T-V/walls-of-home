@@ -18,7 +18,7 @@ function MylikesPage() {
     // Users favs from database.
     const [userfavs, setUserFavs] = useState<FavHouses[]>([]);
     useEffect(() => {
-        fetch(`http://localhost:8080/houses/userfavs/${userInfo}`)
+        fetch(`/houses/userfavs/${userInfo}`)
             .then((res) => res.json())
             .then((data: FavHouses[]) => {
                 setUserFavs(data);
@@ -36,7 +36,7 @@ function MylikesPage() {
             };
 
             try {
-                const res = await fetch('http://localhost:8080/houses/houses', {
+                const res = await fetch('/houses', {
                     body: JSON.stringify(wantedHousID),
                     headers: {
                         'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ function MylikesPage() {
                 </p>
             </div>
 
-            {houses.length === 0 && (
+            {houses.length === 0 && isLoading === false && (
                 <div className="p-3 mb-3 d-flex flex-column align-items-center text-center">
                     <p className=" fs-1 fw-light mb-2 w-100">
                         No favourites yet

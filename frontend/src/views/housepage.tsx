@@ -23,7 +23,7 @@ function HousePage() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/houses/houses/${houseid}?accID=${accID}`)
+        fetch(`/houses/${houseid}?accID=${accID}`)
             .then((res) => res.json())
             .then((data: HouseData) => {
                 setHouse(data.houses);
@@ -42,7 +42,7 @@ function HousePage() {
             houses_id: currentHouseId,
         };
 
-        fetch('http://localhost:8080/houses/userfavs', {
+        fetch('/houses/userfavs', {
             body: JSON.stringify(likeInfo),
             headers: { 'Content-Type': 'application/json' },
             method: 'POST',
@@ -63,14 +63,11 @@ function HousePage() {
             price: Number(bidOffer),
         };
 
-        fetch('http://localhost:8080/houses/bids', {
+        fetch('/houses/bids', {
             body: JSON.stringify(bidInfo),
             headers: { 'Content-Type': 'application/json' },
             method: 'POST',
         });
-        /*.then((response) => {
-            console.log('response bid', response.status);
-        })*/
     }
 
     // If user isnt logged in gets redirested to start.

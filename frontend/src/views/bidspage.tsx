@@ -15,7 +15,7 @@ function BidPage() {
 
     const [userBids, setUserBids] = useState<BidHouses[]>([]);
     useEffect(() => {
-        fetch(`http://localhost:8080/houses/bids/${userInfo}`)
+        fetch(`/houses/bids/${userInfo}`)
             .then((res) => res.json())
             .then((data: BidHouses[]) => {
                 setUserBids(data);
@@ -32,7 +32,7 @@ function BidPage() {
             };
 
             try {
-                const res = await fetch('http://localhost:8080/houses/houses', {
+                const res = await fetch('/houses', {
                     body: JSON.stringify(wantedHousID),
                     headers: {
                         'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ function BidPage() {
                 </p>
             </div>
 
-            {houses.length === 0 && (
+            {houses.length === 0 && isLoading === false && (
                 <div className="p-3 mb-3 d-flex flex-column align-items-center text-center">
                     <p className=" fs-1 fw-light mb-2 w-100">No bids yet</p>
                     <p className=" fs-6 fw-lighter w-100">

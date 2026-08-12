@@ -6,3 +6,4 @@ package-lock.json
 *.d.ts
 
 database.js
+dist

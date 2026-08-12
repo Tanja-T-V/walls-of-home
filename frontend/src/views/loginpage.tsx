@@ -23,7 +23,7 @@ function LoginPage() {
     async function handleLogin() {
         const loginInfo = { username: username, password: password };
         try {
-            const res = await fetch('http://localhost:8080/login/login', {
+            const res = await fetch('/login', {
                 body: JSON.stringify(loginInfo),
                 headers: {
                     'Content-Type': 'application/json',

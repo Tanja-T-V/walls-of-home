@@ -39,7 +39,7 @@ function HouseCards({ houses, isLoading }: Props) {
     if (houses.length === 0) {
         return (
             <>
-                <p>No facilites found.</p>
+                <p className="fw-light fs-3 m-5">No facilites found</p>
             </>
         );
     }
