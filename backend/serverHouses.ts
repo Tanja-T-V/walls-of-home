@@ -49,6 +49,7 @@ interface BidHouses {
 
 //----- Houses ----
 
+//Get all houses
 router.get('/', async (_req, res) => {
     // Adds interface to result
     const houses: QueryResult<Houses> = await database.query(
@@ -58,6 +59,7 @@ router.get('/', async (_req, res) => {
     res.status(200).send(houses.rows);
 });
 
+// Gets a specfic house
 router.get('/:houseid', async (req, res) => {
     const houseID = req.params.houseid;
     const userID = req.query.accID;
@@ -82,13 +84,30 @@ router.get('/:houseid', async (req, res) => {
             [userID, houseID]
         );
 
-        // Creates a const object with the house data and boolean if the house exsist in fav/liked database, only sends the boolean row.
-        const houseData = {
-            houses: house.rows,
-            isLiked: favexsists.rows[0]!.exists,
-        };
+        // to see if there is a bid on the house
+        const bidexsists: QueryResult<BidHouses> = await database.query(
+            'SELECT * FROM userbids WHERE user_id = $1 AND houses_id = $2',
+            [userID, houseID]
+        );
 
-        res.status(200).send(houseData);
+        if (bidexsists.rowCount === 0) {
+            // Creates a const object with the house data and boolean if the house exsist in fav/liked database, only sends the boolean row.
+            const houseData = {
+                houses: house.rows,
+                isLiked: favexsists.rows[0]!.exists,
+                bidPriceHouse: -1,
+            };
+
+            res.status(200).send(houseData);
+        } else {
+            const houseData = {
+                houses: house.rows,
+                isLiked: favexsists.rows[0]!.exists,
+                bidPriceHouse: bidexsists.rows[0]?.price,
+            };
+
+            res.status(200).send(houseData);
+        }
     }
 });
 
@@ -187,18 +206,34 @@ router.get('/bids/:usderid', async (req, res) => {
 router.post('/bids', async (req, res) => {
     const newBid: BidHouses = req.body;
 
-    // Does a insert. In database it have UNIQE (user_id, houses_id) wich makes sure that a user can have multiply of same house. Here with ON CONFLIC it looks at same variable if its a conflict there. If user dont have house in their budlist then it gets added. If user allready have house they DO UPSATE and changes the price with EXCLUDED.
+    if (
+        !('user_id' in newBid) ||
+        !('houses_id' in newBid) ||
+        !('price' in newBid)
+    ) {
+        return res.status(400).json({
+            error: 'Missing information',
+        });
+    }
 
-    await database.query(
-        `INSERT INTO userbids (user_id, houses_id, price)
+    // Does a insert. In database it have UNIQE (user_id, houses_id) wich makes sure that a user can have multiply of same house. Here with ON CONFLIC it looks at same variable if its a conflict there. If user dont have house in their budlist then it gets added. If user allready have house they DO UPDATE and changes the price with EXCLUDED.
+    try {
+        await database.query(
+            `INSERT INTO userbids (user_id, houses_id, price)
         VALUES($1, $2, $3)
         ON CONFLICT (user_id, houses_id)
         DO UPDATE
         SET price = EXCLUDED.price`,
-        [newBid.user_id, newBid.houses_id, newBid.price]
-    );
+            [newBid.user_id, newBid.houses_id, newBid.price]
+        );
 
-    res.status(201).send();
+        res.status(201).send();
+    } catch (error) {
+        //If unexpected error happens
+        return res.status(500).json({
+            error: 'Internal server error',
+        });
+    }
 });
 
 // Exports router so it can be used in main server

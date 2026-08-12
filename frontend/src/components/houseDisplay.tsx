@@ -5,6 +5,7 @@ import {
     DoorOpenFill,
     ArrowsAngleExpand,
     Calendar2WeekFill,
+    Dot,
 } from 'react-bootstrap-icons';
 
 import LikeButton from '../components/likeButton';
@@ -120,14 +121,19 @@ function HouseDisplay({ houses, isLoading, handleLike, isLiked }: Props) {
 
                         <div className="my-3">
                             <p className="fw-bold">Other features</p>
-                            {house.tags.map((tag, i) => (
-                                <div
-                                    key={i}
-                                    className="tag-box p-2 m-2 border border-2 rounded-pill d-inline-block"
-                                >
-                                    <p className="p-1 m-0 fw-light">{tag}</p>
-                                </div>
-                            ))}
+                            <div className="mb-2 d-flex flex-wrap align-items-center gap-3">
+                                {house.tags.map((tag, i) => (
+                                    <div
+                                        key={i}
+                                        className=" d-flex align-items-center gap-1"
+                                    >
+                                        <Dot />
+                                        <p className="p-1 m-0 fw-light">
+                                            {tag}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

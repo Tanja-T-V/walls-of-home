@@ -8,3 +8,38 @@
     border-color: $prim-border-col;
     border-width: 1px;
 }
+/*
+.bidsucsess {
+    border-radius: $border-radius;
+    border-color: $prim-border-col;
+}*/
+
+.bidsucsess {
+    position: relative;
+    padding: 16px, 20px, 16px, 28px;
+    border-radius: $border-radius;
+    border-color: $prim-border-col;
+}
+
+.toast-accent {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    bottom: 10px;
+    width: 4px;
+    background-color: #198754;
+    border-radius: 4px;
+}
+.toast-content {
+    position: relative;
+    margin-left: 1rem;
+}
+
+.userBid {
+    border-radius: 0.5rem;
+    background-color: $prim-sec-col;
+}
+
+.userBid p {
+    margin: 0;
+}

@@ -18,6 +18,7 @@ export interface Houses {
 export interface HouseData {
     houses: Houses[];
     isLiked: boolean;
+    bidPriceHouse: number;
 }
 
 export interface FavHouses {
