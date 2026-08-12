@@ -8,6 +8,7 @@
     Run: SET client_encoding TO 'UTF8';
     Read again and it should say UFT8 and the letters should work again.
 */
+SET client_encoding TO 'UTF8';
 
 -- Tables with foregin keys
 DROP TABLE IF EXISTS userfavs;
