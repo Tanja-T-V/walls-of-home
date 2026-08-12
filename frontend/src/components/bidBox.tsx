@@ -87,12 +87,14 @@ function BidBox({
                         >
                             Place offer
                         </Button>
-                        <Button
-                            className="my-3 w-100 btn-danger"
-                            onClick={() => setShowRemoveMulda(true)}
-                        >
-                            Remove bid
-                        </Button>
+                        {userBidPice > -1 && (
+                            <Button
+                                className="my-3 w-100 btn-danger"
+                                onClick={() => setShowRemoveMulda(true)}
+                            >
+                                Remove bid
+                            </Button>
+                        )}
                     </Stack>
                 </Form>
             </Container>

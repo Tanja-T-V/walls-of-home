@@ -91,7 +91,26 @@ function HousePage() {
     //--- Handle remove bid
     async function handleRemoveBid() {
         setShowRemoveMulda(false);
-        console.log('Removign bid');
+        const deleteInfo = {
+            user_id: accID,
+            houses_id: Number(houseid),
+        };
+        try {
+            const res = await fetch('/houses/bids', {
+                body: JSON.stringify(deleteInfo),
+                headers: { 'Content-Type': 'application/json' },
+                method: 'DELETE',
+            });
+
+            if (res.status === 204) {
+                setUserBidPice(-1);
+                return;
+            } else {
+                return;
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     // If user isnt logged in gets redirested to start.
@@ -141,7 +160,11 @@ function HousePage() {
                             </div>
 
                             <div className="modal-body">
-                                Are you sure you want to remove your offer?
+                                <p>Are you sure you want to remove your bid?</p>
+                                <p>
+                                    Your bid offer will be removed from this
+                                    property.
+                                </p>
                             </div>
 
                             <div className="modal-footer">
@@ -154,7 +177,7 @@ function HousePage() {
                                 </Button>
 
                                 <Button
-                                    className="primarybtn"
+                                    className="btn-danger"
                                     data-bs-dismiss="modal"
                                     onClick={handleRemoveBid}
                                 >

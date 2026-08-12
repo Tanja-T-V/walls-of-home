@@ -47,6 +47,11 @@ interface BidHouses {
     price: number;
 }
 
+interface BidHouseDelete {
+    user_id: number;
+    houses_id: number;
+}
+
 //----- Houses ----
 
 //Get all houses
@@ -234,6 +239,31 @@ router.post('/bids', async (req, res) => {
             error: 'Internal server error',
         });
     }
+});
+
+router.delete('/bids', async (req, res) => {
+    const bidDelete: BidHouseDelete = req.body;
+
+    if (!('user_id' in bidDelete) || !('houses_id' in bidDelete)) {
+        return res.status(400).json({
+            error: 'Missing information',
+        });
+    }
+    try {
+        await database.query(
+            `DELETE FROM userbids
+            WHERE user_id = $1 AND houses_id = $2`,
+            [bidDelete.user_id, bidDelete.houses_id]
+        );
+        res.status(204).send();
+    } catch (error) {
+        //If unexpected error happens
+        return res.status(500).json({
+            error: 'Internal server error',
+        });
+    }
+
+    res.status(201).send();
 });
 
 // Exports router so it can be used in main server
