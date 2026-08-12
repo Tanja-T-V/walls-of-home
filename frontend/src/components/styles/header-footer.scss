@@ -26,6 +26,10 @@
     box-shadow: 10px 0 0 0 $acc-opac-col;
 }
 
+.navbarConatiner {
+    width: clamp(300px, 70%, 1200px);
+}
+
 .navbar-style .navbar-collapse {
     margin-top: 0.4rem;
     margin-left: auto;

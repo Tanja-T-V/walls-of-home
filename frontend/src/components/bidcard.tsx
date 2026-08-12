@@ -28,12 +28,12 @@ function BidCards({ houses, bidhouses, isLoading }: Props) {
     //Shows if api is still fetching
     if (isLoading) {
         return (
-            <>
+            <div className="d-flex flex-column justify-content-center pt-5">
                 <Spinner animation="border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </Spinner>
                 <p>Loading houses...</p>
-            </>
+            </div>
         );
     }
 
