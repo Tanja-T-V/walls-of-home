@@ -1,1 +1,18 @@
 @use '../style/App.scss' as *;
+.boxwidth-house {
+    width: 100%;
+}
+
+@media (min-width: 720px) {
+    .boxwidth-house {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 960px) {
+    .boxwidth-house {
+        width: 70%;
+        margin: 0 auto;
+    }
+}

@@ -28,7 +28,7 @@ function BidCards({ houses, bidhouses, isLoading }: Props) {
     //Shows if api is still fetching
     if (isLoading) {
         return (
-            <div className="d-flex flex-column justify-content-center pt-5">
+            <div className="d-flex flex-column justify-content-center pt-5 w-100">
                 <Spinner animation="border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </Spinner>
@@ -81,13 +81,14 @@ function BidCards({ houses, bidhouses, isLoading }: Props) {
                             {house.currency}
                         </p>
                     </div>
-
-                    <Button
-                        className="primarybtn mt-auto"
-                        onClick={() => handleHouseMore(house.id)}
-                    >
-                        More..
-                    </Button>
+                    <div className="d-flex justify-content-center mt-auto">
+                        <Button
+                            className="primarybtn bidbuttonwidth mt-auto"
+                            onClick={() => handleHouseMore(house.id)}
+                        >
+                            More..
+                        </Button>
+                    </div>
                 </div>
             ))}
         </>

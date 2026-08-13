@@ -26,7 +26,7 @@ function HouseCards({ houses, isLoading }: Props) {
     //Shows if api is still fetching
     if (isLoading) {
         return (
-            <div className="d-flex flex-column justify-content-center pt-5">
+            <div className="d-flex flex-column justify-content-center pt-5 w-100">
                 <Spinner animation="border" role="status">
                     <span className="visually-hidden">Loading...</span>
                 </Spinner>
@@ -75,12 +75,14 @@ function HouseCards({ houses, isLoading }: Props) {
                     <div className="mt-1 mb-4">
                         <p>{house.description}</p>
                     </div>
-                    <Button
-                        className="primarybtn mt-auto"
-                        onClick={() => handleHouseMore(house.id)}
-                    >
-                        More..
-                    </Button>
+                    <div className="d-flex justify-content-center mt-auto">
+                        <Button
+                            className="primarybtn  buttonwidth mt-auto"
+                            onClick={() => handleHouseMore(house.id)}
+                        >
+                            More..
+                        </Button>
+                    </div>
                 </div>
             ))}
         </>

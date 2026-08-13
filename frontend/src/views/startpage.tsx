@@ -37,8 +37,8 @@ function StartPage() {
 
     return (
         <>
-            <div className="header-box py-3 px-5 mb-3 d-flex flex-column align-items-center text-center">
-                <p className="header-text fs-1 fw-light w-100">
+            <div className="header-box p-3 mb-3 d-flex flex-column align-items-center text-center">
+                <p className="header-text fs-1 fw-light mb-2 w-100">
                     Find The Walls You'll Call Home
                 </p>
             </div>

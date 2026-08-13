@@ -19,6 +19,9 @@ function HousePage() {
     const [bidSucsessfull, setBidSucsessfull] = useState<boolean>(false);
     const [bidOffer, setBidOffer] = useState<string>('');
 
+    // To diabled the bid button for invalid input and after click handeling
+    const [bidBtnDisabled, setBidBtnDisabled] = useState<boolean>(true);
+
     // For fetching specific house
     // Makes isLoading true while api gets fetched.
     const [house, setHouse] = useState<Houses[]>([]);
@@ -63,6 +66,8 @@ function HousePage() {
     // ---- Handels Bid ----
     async function handleBid() {
         const currentHouseId = house[0].id;
+        setBidBtnDisabled(true);
+
         // A conts for all infromation that is needed for update/add new row in table. Also converts the bidoffer input from string to a number, validation that it can be a number exsist allready in bidBox.tsx.
         const bidInfo = {
             user_id: accID,
@@ -79,6 +84,10 @@ function HousePage() {
             if (res.status === 201) {
                 setBidSucsessfull(true);
                 setUserBidPice(bidInfo.price);
+
+                setTimeout(() => {
+                    setBidSucsessfull(false);
+                }, 4000);
                 return;
             } else {
                 return;
@@ -133,7 +142,7 @@ function HousePage() {
             </div>
 
             {isLoading === false && (
-                <div>
+                <div className="boxwidth-house">
                     <BidBox
                         onBidding={handleBid}
                         setBidOffer={setBidOffer}
@@ -141,6 +150,8 @@ function HousePage() {
                         userBidPice={userBidPice}
                         bidcurrency={house[0].currency}
                         setShowRemoveMulda={setShowRemoveMulda}
+                        bidBtnDisabled={bidBtnDisabled}
+                        setBidBtnDisabled={setBidBtnDisabled}
                     />
                 </div>
             )}

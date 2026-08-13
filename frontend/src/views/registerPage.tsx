@@ -46,6 +46,7 @@ function RegisterPage() {
                 setAccName(data[0].username);
                 setIsLoggedIn(true);
                 setLogginErr(false);
+
                 return;
             }
             if (res.status === 400) {

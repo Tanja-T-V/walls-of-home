@@ -3,7 +3,7 @@
 .bidcard {
     background-color: $prim-card-col;
     border-radius: $border-radius;
-    width: 340px;
+    width: clamp(340px, 30vw, 500px);
 
     border-style: solid;
     border-color: $prim-border-col;
@@ -18,4 +18,8 @@
 .activebid {
     border-radius: 0.5rem;
     background-color: $prim-sec-col;
+}
+
+.bidbuttonwidth {
+    width: clamp(280px, 20vw, 550px);
 }

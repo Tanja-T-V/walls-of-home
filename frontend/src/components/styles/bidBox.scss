@@ -8,11 +8,15 @@
     border-color: $prim-border-col;
     border-width: 1px;
 }
-/*
-.bidsucsess {
-    border-radius: $border-radius;
-    border-color: $prim-border-col;
-}*/
+
+.bidcontent {
+    width: 100%;
+    flex-direction: column;
+}
+
+.bid-input {
+    width: 100%;
+}
 
 .bidsucsess {
     position: relative;
@@ -20,6 +24,27 @@
     border-radius: $border-radius;
     border-color: $prim-border-col;
 }
+
+.bidbutton-box {
+    flex-direction: column;
+}
+
+.bidPlace-button {
+    margin-bottom: 2rem;
+    height: 48px;
+    width: 100%;
+}
+
+.bidRemove-boxbtn {
+    margin-bottom: 1rem;
+}
+
+.bidRemove-button {
+    height: 38px;
+    width: 100%;
+}
+
+// For the toast popup /alert
 
 .toast-accent {
     position: absolute;
@@ -35,11 +60,47 @@
     margin-left: 1rem;
 }
 
+// Fot he users bid offer
 .userBid {
+    padding: 8px 16px;
     border-radius: 0.5rem;
     background-color: $prim-sec-col;
 }
 
 .userBid p {
     margin: 0;
+}
+
+@media (min-width: 720px) {
+    .bidcontent {
+        width: 100%;
+    }
+    .bid-input {
+        width: 100%;
+    }
+}
+
+@media (min-width: 960px) {
+    .bidcontent {
+        flex-direction: row;
+        gap: 3rem;
+    }
+
+    .bid-input {
+        width: 50%;
+    }
+
+    .bidbutton-box {
+        flex-direction: row;
+    }
+
+    .bidPlace-button {
+        margin-right: 10px;
+        height: 38px;
+    }
+
+    .bidRemove-button {
+        margin-left: 10px;
+        width: 70%;
+    }
 }

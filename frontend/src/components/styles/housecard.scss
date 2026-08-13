@@ -3,7 +3,7 @@
 .housecards {
     background-color: $prim-card-col;
     border-radius: $border-radius;
-    width: 340px;
+    width: clamp(340px, 35vw, 600px);
 
     border-style: solid;
     border-color: $prim-border-col;
@@ -13,4 +13,8 @@
 .housecards p {
     margin: 0;
     padding: 0;
+}
+
+.buttonwidth {
+    width: clamp(280px, 20vw, 550px);
 }
