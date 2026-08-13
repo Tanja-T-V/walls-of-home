@@ -52,9 +52,9 @@ function LoginPage() {
         }
     }
 
+    // If register is pressed, redirects
     function handleRegisterAccount() {
         navigate('/register');
-        console.log('Handeling creating account');
     }
 
     useEffect(() => {

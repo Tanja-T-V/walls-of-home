@@ -1,12 +1,16 @@
+import '../style/AboutPage.scss';
+
 function AboutPage() {
     return (
         <div className="my-5 mx-2 p-2">
-            <h2 className="fw-bold mb-4">About Walls of Home</h2>
-
+            <div className="aboutHeader">
+                <h2 className="fw-bold mb-4">About Walls of Home</h2>
+            </div>
             <div className="mb-4">
                 <p className="fw-bold fs-5">
                     More than a property. A place to belong.
                 </p>
+
                 <p>
                     At <b>Walls of Home</b>, we believe that a home is about
                     much more than what surrounds you. It is the mornings, the

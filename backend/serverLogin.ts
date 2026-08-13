@@ -28,7 +28,6 @@ interface ReqLogin {
 //----- Login ------
 router.post('/', async (req, res) => {
     const user: ReqLogin = req.body;
-
     if (!('username' in user) || !('password' in user)) {
         return res.status(400).send('Missing body information');
     }

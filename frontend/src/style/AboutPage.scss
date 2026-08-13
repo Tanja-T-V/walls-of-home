@@ -1,0 +1,6 @@
+@use '../style/App.scss' as *;
+
+.aboutHeader {
+    background-color: $prim-dark-col;
+    color: $prim-light-col;
+}
