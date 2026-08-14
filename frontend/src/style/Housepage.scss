@@ -3,10 +3,21 @@
     width: 100%;
 }
 
+.link-text {
+    color: $prim-dark-col;
+}
+
+.link-box {
+    width: 100%;
+}
+
 @media (min-width: 720px) {
     .boxwidth-house {
         width: 90%;
         margin: 0 auto;
+    }
+    .link-box {
+        width: 90%;
     }
 }
 
@@ -14,5 +25,8 @@
     .boxwidth-house {
         width: 70%;
         margin: 0 auto;
+    }
+    .link-box {
+        width: 70%;
     }
 }

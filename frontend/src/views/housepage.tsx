@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import { ArrowLeftShort } from 'react-bootstrap-icons';
 import { useAuthContext } from '../context/authContext';
 import '../style/Housepage.scss';
 
@@ -132,6 +132,17 @@ function HousePage() {
 
     return (
         <div className="my-5 mx-2 p-2">
+            <div className="boxwidth-house mb-5 px-2 d-flex gap-1 align-items-center">
+                <ArrowLeftShort size={24} />
+
+                <Link
+                    to="/start"
+                    className="link-text link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                >
+                    Back
+                </Link>
+            </div>
+
             <div>
                 <HouseDisplay
                     houses={house}
