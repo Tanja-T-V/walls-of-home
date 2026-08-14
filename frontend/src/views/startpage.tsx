@@ -38,9 +38,9 @@ function StartPage() {
     return (
         <>
             <div className="header-box p-3 mb-3 d-flex flex-column align-items-center text-center">
-                <p className="header-text fs-1 fw-light mb-2 w-100">
+                <h1 className="header-text fs-1 fw-light mb-2 w-100">
                     Find The Walls You'll Call Home
-                </p>
+                </h1>
             </div>
             <div className="d-flex flex-wrap justify-content-center">
                 <Housecard houses={houses} isLoading={isLoading} />

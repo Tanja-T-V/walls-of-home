@@ -72,9 +72,9 @@ function MylikesPage() {
     return (
         <>
             <div className="like-box p-3 mb-3 d-flex flex-column align-items-center text-center">
-                <p className="header-text-like fs-1 fw-light mb-2 w-100">
+                <h1 className="header-text-like fs-1 fw-light mb-2 w-100">
                     Your Favourites Homes
-                </p>
+                </h1>
                 <p className="text-like fs-6 fw-lighter w-100">
                     A collection of homes you might call your own.
                 </p>

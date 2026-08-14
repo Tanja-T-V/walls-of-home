@@ -68,9 +68,9 @@ function BidPage() {
     return (
         <>
             <div className="bid-box p-3 mb-3 d-flex flex-column align-items-center text-center">
-                <p className="header-text-bid fs-1 fw-light mb-2 w-100">
+                <h1 className="header-text-bid fs-1 fw-light mb-2 w-100">
                     Bids & offers
-                </p>
+                </h1>
                 <p className="bid-text fs-6 fw-lighter w-100">
                     Follow your active bids and keep track of the homes you're
                     intressted in.
