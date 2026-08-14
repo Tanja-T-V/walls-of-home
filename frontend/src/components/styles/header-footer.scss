@@ -15,17 +15,6 @@
     box-shadow: 0 0 10px 0 $acc-opac-col;
 }
 
-.Footer {
-    background-color: $prim-dark-col;
-    color: $prim-light-col;
-
-    margin: 0;
-    padding-block: clamp(2rem, 4vw, 4rem);
-    padding-inline: clamp(1rem, 4vw, 3rem);
-
-    box-shadow: 10px 0 0 0 $acc-opac-col;
-}
-
 .navbarConatiner {
     width: clamp(300px, 70%, 1200px);
 }
@@ -55,4 +44,19 @@
         border-color: $prim-border-col;
         border-width: 1px;
     }
+}
+
+.Footer {
+    background-color: $prim-dark-col;
+    color: $prim-light-col;
+
+    margin: 0;
+    padding-block: clamp(2rem, 4vw, 4rem);
+    padding-inline: clamp(1rem, 4vw, 3rem);
+
+    box-shadow: 10px 0 0 0 $acc-opac-col;
+}
+
+.footer-links p {
+    margin: 0;
 }
