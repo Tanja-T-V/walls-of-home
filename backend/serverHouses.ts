@@ -67,7 +67,43 @@ router.get('/', async (_req, res) => {
         'SELECT * FROM houses'
     );
 
-    res.status(200).send(houses.rows);
+    //Gets the specific house images map/url locations.
+    const houseimgs: QueryResult<Houseimgs> = await database.query(
+        'SELECT * FROM houseimgs'
+    );
+
+    const housesWImages = {
+        houses: houses.rows,
+        houseimgs: houseimgs.rows,
+    };
+
+    res.status(200).send(housesWImages);
+});
+
+// Gets houses that match a user fav array.
+router.post('/', async (req, res) => {
+    const houseID: HouseFavID = req.body;
+
+    if (!('houses_id' in houseID)) {
+        return res.status(400).send('Missing body information');
+    } else {
+        const houses: QueryResult<Houses> = await database.query(
+            'SELECT * FROM houses WHERE id = ANY($1)',
+            [[houseID.houses_id]]
+        );
+
+        //Gets the specific house images map/url locations.
+        const houseimgs: QueryResult<Houseimgs> = await database.query(
+            'SELECT * FROM houseimgs'
+        );
+
+        const housesWImages = {
+            houses: houses.rows,
+            houseimgs: houseimgs.rows,
+        };
+
+        return res.status(201).send(housesWImages);
+    }
 });
 
 // Gets a specfic house
@@ -130,25 +166,11 @@ router.get('/:houseid', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
-    const houseID: HouseFavID = req.body;
-
-    if (!('houses_id' in houseID)) {
-        return res.status(400).send('Missing body information');
-    } else {
-        const { rows }: QueryResult<Houses> = await database.query(
-            'SELECT * FROM houses WHERE id = ANY($1)',
-            [[houseID.houses_id]]
-        );
-
-        return res.status(201).send(rows);
-    }
-});
-
-//----- FavHouses & Liked houses ----
+//------------------ FavHouses & Liked houses --------------
 // Gets all the user liked houses
 router.get('/userfavs/:userdid', async (req, res) => {
     const user = req.params.userdid;
+
     const favHouses: QueryResult<FavHouses> = await database.query(
         'SELECT * FROM userfavs WHERE user_id = $1',
         [user]
@@ -205,7 +227,7 @@ router.post('/userfavs', async (req, res) => {
     }
 });
 
-//----- Bid houses ----
+//---------------- Bid houses --------------------
 // To display houses that user have bid on
 router.get('/bids/:usderid', async (req, res) => {
     const user = req.params.usderid;

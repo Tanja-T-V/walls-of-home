@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../style/BidPage.scss';
 
 import BidCards from '../components/bidcard';
-import type { Houses, BidHouses } from '../interface/houseIntf';
+import type { Houses, HouseWImages, BidHouses } from '../interface/houseIntf';
 
 function BidPage() {
     const { isLoggedIn, accID } = useAuthContext();
@@ -41,8 +41,8 @@ function BidPage() {
                 });
 
                 if (res.status === 201) {
-                    const data: Houses[] = await res.json();
-                    setHouses(data);
+                    const data: HouseWImages = await res.json();
+                    setHouses(data.houses);
                     setIsLoading(false);
 
                     return;

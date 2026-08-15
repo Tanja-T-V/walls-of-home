@@ -18,3 +18,9 @@
 .buttonwidth {
     width: clamp(280px, 20vw, 550px);
 }
+
+.card-img {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+}

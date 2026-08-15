@@ -21,6 +21,11 @@ export interface Houseimgs {
     images: string[];
 }
 
+export interface HouseWImages {
+    houses: Houses[];
+    houseimgs: Houseimgs[];
+}
+
 export interface HouseData {
     houses: Houses[];
     images: Houseimgs[];

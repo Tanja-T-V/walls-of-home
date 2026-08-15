@@ -5,12 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import '../style/Startpage.scss';
 
 // House interfaces
-import type { Houses } from '../interface/houseIntf';
+import type { Houses, Houseimgs, HouseWImages } from '../interface/houseIntf';
 
 function StartPage() {
     const { isLoggedIn } = useAuthContext();
 
     const [houses, setHouses] = useState<Houses[]>([]);
+    const [houseimgs, setHouseImgs] = useState<Houseimgs[]>([]);
+
     // makes isLoading true while api gets fetched.
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -18,8 +20,9 @@ function StartPage() {
     useEffect(() => {
         fetch('/houses')
             .then((res) => res.json())
-            .then((data: Houses[]) => {
-                setHouses(data);
+            .then((data: HouseWImages) => {
+                setHouses(data.houses);
+                setHouseImgs(data.houseimgs);
             })
             .finally(() => {
                 // Changes is loading when its all fetched.
@@ -43,7 +46,11 @@ function StartPage() {
                 </h1>
             </div>
             <div className="d-flex flex-wrap justify-content-center">
-                <Housecard houses={houses} isLoading={isLoading} />
+                <Housecard
+                    houses={houses}
+                    isLoading={isLoading}
+                    houseimgs={houseimgs}
+                />
             </div>
         </>
     );

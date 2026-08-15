@@ -4,14 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import './styles/housecard.scss';
 
 // Interface
-import type { Houses } from '../interface/houseIntf';
+import type { Houses, Houseimgs } from '../interface/houseIntf';
 
 type Props = {
     houses: Houses[];
+    houseimgs: Houseimgs[];
     isLoading: boolean;
 };
 
-function HouseCards({ houses, isLoading }: Props) {
+function HouseCards({ houses, houseimgs, isLoading }: Props) {
     // Removes leftovers form SQL DATE. Removes Timezone. 2026-05-26T00:00:00.000Z to 2026-05-26
     const houseClean = houses.map((house) => ({
         ...house,
@@ -51,6 +52,16 @@ function HouseCards({ houses, isLoading }: Props) {
                     key={house.id}
                     className="housecards mx-3 my-4 p-3 d-flex flex-column"
                 >
+                    <img
+                        className="rounded mb-3"
+                        src={
+                            houseimgs.find(
+                                (houseimg) => houseimg.id === house.id
+                            )?.image_main ?? '/images/placeholder-house.png'
+                        }
+                        alt="Img of hosue"
+                    />
+
                     <p className="fw-bold mb-2">{house.address}</p>
 
                     <div className="mb-2 d-flex align-items-center gap-2">

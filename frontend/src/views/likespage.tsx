@@ -6,16 +6,23 @@ import '../style/LikedPage.scss';
 import Housecard from '../components/housecard';
 
 // House interfaces
-import type { Houses, FavHouses } from '../interface/houseIntf';
+import type {
+    Houses,
+    Houseimgs,
+    HouseWImages,
+    FavHouses,
+} from '../interface/houseIntf';
 
 function MylikesPage() {
     const { isLoggedIn, accID } = useAuthContext();
     const userInfo = accID;
 
     const [houses, setHouses] = useState<Houses[]>([]);
+    const [houseimgs, setHouseImgs] = useState<Houseimgs[]>([]);
+
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    // Users favs from database.
+    // Users favs from database once.
     const [userfavs, setUserFavs] = useState<FavHouses[]>([]);
     useEffect(() => {
         fetch(`/houses/userfavs/${userInfo}`)
@@ -45,8 +52,11 @@ function MylikesPage() {
                 });
                 // Sets Houses with the data and changes loading to false
                 if (res.status === 201) {
-                    const data: Houses[] = await res.json();
-                    setHouses(data);
+                    const data: HouseWImages = await res.json();
+
+                    setHouses(data.houses);
+                    setHouseImgs(data.houseimgs);
+
                     setIsLoading(false);
 
                     return;
@@ -94,7 +104,11 @@ function MylikesPage() {
 
             {houses.length > 0 && (
                 <div className=" d-flex flex-wrap justify-content-center">
-                    <Housecard houses={houses} isLoading={isLoading} />
+                    <Housecard
+                        houses={houses}
+                        isLoading={isLoading}
+                        houseimgs={houseimgs}
+                    />
                 </div>
             )}
         </>
