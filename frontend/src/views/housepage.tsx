@@ -10,7 +10,7 @@ import HouseDisplay from '../components/houseDisplay';
 import BidBox from '../components/bidBox';
 
 // Interface
-import type { Houses, HouseData } from '../interface/houseIntf';
+import type { Houses, HouseData, Houseimgs } from '../interface/houseIntf';
 
 function HousePage() {
     const { houseid } = useParams();
@@ -25,17 +25,20 @@ function HousePage() {
     // For fetching specific house
     // Makes isLoading true while api gets fetched.
     const [house, setHouse] = useState<Houses[]>([]);
+    const [houseimgs, setHouseImgs] = useState<Houseimgs[]>([]);
     const [isLiked, setIsLiked] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [userBidPice, setUserBidPice] = useState<number>(-1);
 
     const [showRemoveMulda, setShowRemoveMulda] = useState<boolean>(false);
 
+    //--- Gets house information -----
     useEffect(() => {
         fetch(`/houses/${houseid}?accID=${accID}`)
             .then((res) => res.json())
             .then((data: HouseData) => {
                 setHouse(data.houses);
+                setHouseImgs(data.images);
                 setIsLiked(data.isLiked);
                 setUserBidPice(data.bidPriceHouse);
             })
@@ -63,7 +66,7 @@ function HousePage() {
             });
     }
 
-    // ---- Handels Bid ----
+    // --------------- Handels Bid ---------------
     async function handleBid() {
         const currentHouseId = house[0].id;
         setBidBtnDisabled(true);
@@ -97,7 +100,7 @@ function HousePage() {
         }
     }
 
-    //--- Handle remove bid
+    //-------- Handle remove bid ----------------
     async function handleRemoveBid() {
         setShowRemoveMulda(false);
         const deleteInfo = {
@@ -131,8 +134,8 @@ function HousePage() {
     }, [isLoggedIn, navigate]);
 
     return (
-        <div className="my-5 mx-2 p-2">
-            <div className="boxwidth-house mb-5 px-2 d-flex gap-1 align-items-center">
+        <div className="mt-2 mb-5 mx-2 p-2">
+            <div className="boxwidth-house px-2 d-flex gap-1 align-items-center">
                 <ArrowLeftShort size={24} />
 
                 <Link
@@ -146,6 +149,7 @@ function HousePage() {
             <div>
                 <HouseDisplay
                     houses={house}
+                    houseImgs={houseimgs}
                     isLoading={isLoading}
                     handleLike={handleLike}
                     isLiked={isLiked}

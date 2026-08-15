@@ -15,8 +15,15 @@ export interface Houses {
     tags: string[];
 }
 
+export interface Houseimgs {
+    id: number;
+    image_main: string;
+    images: string[];
+}
+
 export interface HouseData {
     houses: Houses[];
+    images: Houseimgs[];
     isLiked: boolean;
     bidPriceHouse: number;
 }

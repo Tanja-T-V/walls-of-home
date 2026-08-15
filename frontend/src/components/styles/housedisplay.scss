@@ -20,9 +20,22 @@
     width: 100%;
 }
 
+.carusell-box {
+    margin-top: 12px;
+}
+
+.carousell-img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+}
+
 @media (min-width: 720px) {
     .text-detials {
         width: 100%;
+    }
+    .carusell-box {
+        margin-top: 32px;
     }
 }
 
@@ -36,5 +49,9 @@
 
     .text-detials {
         width: 80%;
+    }
+
+    .carousell-img {
+        height: 550px;
     }
 }

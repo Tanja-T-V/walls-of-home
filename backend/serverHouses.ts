@@ -23,6 +23,12 @@ interface Houses {
     tags: string[];
 }
 
+interface Houseimgs {
+    id: number;
+    image_main: string;
+    images: string[];
+}
+
 interface FavHouses {
     id: number;
     user_id: number;
@@ -69,8 +75,14 @@ router.get('/:houseid', async (req, res) => {
     const houseID = req.params.houseid;
     const userID = req.query.accID;
 
+    //Gets the specific house
     const house: QueryResult<Houses> = await database.query(
         'SELECT * FROM houses WHERE id = $1',
+        [houseID]
+    );
+    //Gets the specific house images map/url locations.
+    const houseimgs: QueryResult<Houseimgs> = await database.query(
+        'SELECT * FROM houseimgs WHERE houses_id = $1',
         [houseID]
     );
 
@@ -78,6 +90,7 @@ router.get('/:houseid', async (req, res) => {
         // Creates a const object with the house data and boolean if the house exsist in fav/liked database, only sends the boolean row.
         const houseData = {
             houses: house.rows,
+            images: houseimgs.rows,
             isLiked: false,
         };
 
@@ -99,6 +112,7 @@ router.get('/:houseid', async (req, res) => {
             // Creates a const object with the house data and boolean if the house exsist in fav/liked database, only sends the boolean row.
             const houseData = {
                 houses: house.rows,
+                images: houseimgs.rows,
                 isLiked: favexsists.rows[0]!.exists,
                 bidPriceHouse: -1,
             };
@@ -107,10 +121,10 @@ router.get('/:houseid', async (req, res) => {
         } else {
             const houseData = {
                 houses: house.rows,
+                images: houseimgs.rows,
                 isLiked: favexsists.rows[0]!.exists,
                 bidPriceHouse: bidexsists.rows[0]?.price,
             };
-
             res.status(200).send(houseData);
         }
     }

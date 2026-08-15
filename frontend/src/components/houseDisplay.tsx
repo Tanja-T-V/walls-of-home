@@ -1,4 +1,4 @@
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Carousel } from 'react-bootstrap';
 import './styles/housedisplay.scss';
 import {
     HousesFill,
@@ -11,21 +11,31 @@ import {
 import LikeButton from '../components/likeButton';
 
 // Interface
-import type { Houses } from '../interface/houseIntf';
+import type { Houses, Houseimgs } from '../interface/houseIntf';
 
 type Props = {
     houses: Houses[];
+    houseImgs: Houseimgs[];
     isLoading: boolean;
     handleLike: () => void;
     isLiked: boolean;
 };
 
-function HouseDisplay({ houses, isLoading, handleLike, isLiked }: Props) {
+function HouseDisplay({
+    houses,
+    houseImgs,
+    isLoading,
+    handleLike,
+    isLiked,
+}: Props) {
     // Removes leftovers form SQL DATE. Removes Timezone. 2026-05-26T00:00:00.000Z to 2026-05-26
     const houseClean = houses.map((house) => ({
         ...house,
         publiched: house.publiched.toString().split('T')[0],
     }));
+
+    // To be able to determit if its undefine when looking for image_main key. if undefine renders a default img.
+    const imageMain = houseImgs[0]?.image_main;
 
     //Shows if api is still fetching
     if (isLoading) {
@@ -52,6 +62,28 @@ function HouseDisplay({ houses, isLoading, handleLike, isLiked }: Props) {
         <>
             {houseClean.map((house) => (
                 <div key={house.id} className="house-box d-flex flex-column">
+                    <Carousel className="carusell-box mb-4">
+                        <Carousel.Item>
+                            <img
+                                className="carousell-img"
+                                src={
+                                    imageMain || '/images/placeholder-house.png'
+                                }
+                                alt="Img of hosue"
+                            />
+                        </Carousel.Item>
+                        {houseImgs.length > 0 &&
+                            houseImgs[0].images.map((image) => (
+                                <Carousel.Item>
+                                    <img
+                                        className="carousell-img"
+                                        src={image}
+                                        alt="Img of hosue"
+                                    />
+                                </Carousel.Item>
+                            ))}
+                    </Carousel>
+
                     <div className="boxwidth-house px-3">
                         <p className="fs-3 fw-bold mb-2">{house.address}</p>
 
