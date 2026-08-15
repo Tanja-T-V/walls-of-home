@@ -13,6 +13,8 @@ SET client_encoding TO 'UTF8';
 -- Tables with foregin keys
 DROP TABLE IF EXISTS userfavs;
 DROP TABLE IF EXISTS userbids;
+DROP TABLE IF EXISTS houseimgs;
+
 
 -- Tables without FK
 DROP TABLE IF EXISTS accounts;
@@ -42,6 +44,13 @@ CREATE TABLE houses (
     tags TEXT[]
 );
 
+CREATE TABLE houseimgs (
+    id SERIAL PRIMARY KEY,
+    houses_id INTEGER UNIQUE NOT NULL REFERENCES houses(id),
+    image_main TEXT,
+    images TEXT[]
+);
+
 CREATE TABLE userfavs (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES accounts(id),
@@ -69,6 +78,13 @@ INSERT INTO houses (start_price, city, address, property_type, living_area, room
 INSERT INTO houses (start_price, city, address, property_type, living_area, rooms, build_year, parking, exterior, description, tags) VALUES (3450000, 'Gothenburg', 'Linnégatan 18C, 413 04 Gothenburg', 'Apartment', '72 m2', 3, 2016, 'Rent parking', 'Balcony', 'Modern apartment in a vibrant city district with open-plan design, balcony, and access to a shared rooftop terrace.', '{"Elevator", "Walk-in closet", "Central location", "Smart home"}');
 INSERT INTO houses (start_price, city, address, property_type, living_area, rooms, build_year, parking, exterior, description, tags ) VALUES (6780000, 'Växjo', 'Björkås Gård 7, 355 91 Växjö', 'Farm', '210 m2', 7, 1923, 'Garage', 'Farmland', 'A charming countryside farm with renovated main house, extensive land, and peaceful surroundings close to nature.', '{"Fireplace", "Sea view", "Newly renovated"}');
 INSERT INTO houses (start_price, city, address, property_type, living_area, rooms, build_year, parking, exterior, description, tags ) VALUES (3980000, 'Malmö', 'Rosengången 11, 217 63 Malmö', 'House', '118 m2', 5, 2007, 'Private parking', 'Backyard', 'Well-planned townhouse with private outdoor spaces, located in a family-friendly neighborhood with good city access.','{"Family friendly", "Pool", "Central location"}');
+
+INSERT INTO houseimgs (houses_id, image_main, images) VALUES ( 1, '../images/linkoping/linkop-house-outside-AI.png', '{"../images/linkoping/linkop-house-interior-AI.png", "../images/linkoping/linköp-house-floorplan-AI.png"}');
+INSERT INTO houseimgs (houses_id, image_main, images) VALUES ( 2, '../images/gbg/gbg-apart-outside-AI.png', '{"../images/gbg/gbg-apart-interior-AI.png", "../images/gbg/gbg-apart-floorplan-AI.png"}');
+INSERT INTO houseimgs (houses_id, image_main, images) VALUES ( 3, '../images/vaxjo/vaxjo-farm-outside-AI.png', '{"../images/vaxjo/vaxjo-farm-interior-AI.png", "../images/vaxjo/vaxjo-farm-floorplan-AI.png"}');
+INSERT INTO houseimgs (houses_id, image_main, images) VALUES ( 4, '../images/malmo/malmo-house-outside-AI.png', '{"../images/malmo/malmo-house-interior-AI.png", "../images/malmo/malmo-house-floorplan-AI.png"}');
+
+
 
 INSERT INTO userfavs (user_id, houses_id) VALUES ( 1, 1);
 INSERT INTO userfavs (user_id, houses_id) VALUES ( 1, 3);
