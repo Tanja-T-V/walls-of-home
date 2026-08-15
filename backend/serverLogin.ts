@@ -1,7 +1,6 @@
 import express from 'express';
 import { database } from './database/database.js';
 import type { QueryResult } from 'pg';
-import { error } from 'console';
 
 const router = express.Router();
 
